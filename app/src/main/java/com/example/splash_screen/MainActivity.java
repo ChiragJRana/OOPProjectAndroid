@@ -59,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
         LoginBtn.setOnClickListener(new View.OnClickListener() {                                //Method to do something when a button or a text is clicked...
             @Override
             public void onClick(View view) {
-                if (check());             //Check the methods first get the text and then convert it to string...
-                validate(Email.getText().toString(), Password.getText().toString());
+                if (check()) {            //Check the methods first get the text and then convert it to string...
+                    validate(Email.getText().toString(), Password.getText().toString());
+
+                }
             }
         });
 
