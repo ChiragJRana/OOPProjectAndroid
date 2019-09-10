@@ -42,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                 profileFN.setText("FName: "+userProfile.getFName());
                 profileLN.setText("LName: "+userProfile.getLName());
-                //profileGender.setText(userProfile.getGender());
+                profileGender.setText("Gender: "+userProfile.getGender());
                 profileEmail.setText("Email: "+userProfile.getEmail());
                 profileStd.setText("Standard: "+userProfile.getStd());
                 profileDOB.setText("DOB: "+userProfile.getDOB());

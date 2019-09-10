@@ -6,27 +6,28 @@ public class UserProfile {
     private String Email;
     private String std;
     private String DOB;
-    //public String Gender;
+    private String Gender;
 
     public UserProfile(){
 
     }
 
-    public UserProfile(String FName, String LName, String email, String std, String DOB) {
+    public UserProfile(String FName, String LName, String email, String std, String DOB,String Gender) {
         this.FName = FName;
         this.LName = LName;
         this.Email = email;
         this.std = std;
         this.DOB = DOB;
+        this.Gender = Gender;
     }
 
-    /*public String getGender() {
+    public String getGender() {
         return Gender;
     }
 
     public void setGender(String gender) {
         Gender = gender;
-    }*/
+    }
 
     public String getFName() {
         return FName;

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,11 +35,10 @@ public class Register_Student extends AppCompatActivity {
     private EditText LN;
     private EditText Email;
     private EditText Password;
-    private RadioButton rb1_M;
-    private RadioButton rb2_F;
-    private RadioButton rb3_O;
+    private RadioGroup gender;
+    private RadioButton selectGender;
     private TextView std;
-    private Spinner spstd;
+    //private Spinner spstd;
     private List<String> priorityList;
     private TextView dob;
     private Button btn_Register;
@@ -97,9 +97,7 @@ public class Register_Student extends AppCompatActivity {
         LN = (EditText)findViewById(R.id.et_LN);
         Email = (EditText)findViewById(R.id.et_Email);
         Password = (EditText)findViewById(R.id.et_password);
-        rb1_M = (RadioButton)findViewById(R.id.rb_Male);
-        rb2_F = (RadioButton)findViewById(R.id.rb_Female);
-        rb3_O = (RadioButton)findViewById(R.id.rb_Other);
+        gender = (RadioGroup)findViewById(R.id.radioGroup);
         std = (TextView) findViewById(R.id.et_std);
         dob = (TextView)findViewById(R.id.et_dob);
         btn_Register = (Button)findViewById(R.id.btn_Register);
@@ -131,6 +129,11 @@ public class Register_Student extends AppCompatActivity {
         result=true;
         return result;
     }
+    private String getRadioText(){
+        int radioId = gender.getCheckedRadioButtonId();
+        selectGender = findViewById(radioId);
+        return selectGender.getText().toString();
+    }
 
     private void sendEmailVerification(){
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -156,7 +159,7 @@ public class Register_Student extends AppCompatActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());                 //This getUid method is to get the User ID which is a hash value from the firebase...
         //In the above line we might have given the name as the reference but there could have been multiple names creating problems in data manupilation...
-        UserProfile userProfile = new UserProfile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString());
+        UserProfile userProfile = new UserProfile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString(),getRadioText());
         databaseReference.setValue(userProfile);
     }
 }
