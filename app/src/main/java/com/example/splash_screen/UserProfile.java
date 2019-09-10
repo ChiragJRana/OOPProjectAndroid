@@ -1,12 +1,12 @@
 package com.example.splash_screen;
 
 public class UserProfile {
-    public String FName;
-    public String LName;
-    public String Email;
-    public String std;
-    public String DOB;
-    public String Gender;
+    private String FName;
+    private String LName;
+    private String Email;
+    private String std;
+    private String DOB;
+    //public String Gender;
 
     public UserProfile(){
 

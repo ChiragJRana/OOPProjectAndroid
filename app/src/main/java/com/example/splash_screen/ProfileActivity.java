@@ -40,8 +40,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                profileFN.setText("First Name: "+userProfile.getFName());
-                profileLN.setText("Last Name: "+userProfile.getLName());
+                profileFN.setText("FName: "+userProfile.getFName());
+                profileLN.setText("LName: "+userProfile.getLName());
                 //profileGender.setText(userProfile.getGender());
                 profileEmail.setText("Email: "+userProfile.getEmail());
                 profileStd.setText("Standard: "+userProfile.getStd());
