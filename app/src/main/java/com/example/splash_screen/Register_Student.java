@@ -101,11 +101,11 @@ public class Register_Student extends AppCompatActivity {
         gender = (RadioGroup)findViewById(R.id.radioGroup);
         std = (TextView) findViewById(R.id.et_std);
         dob = (TextView)findViewById(R.id.et_dob);
-        spcntcode = (Spinner)findViewById(R.id.spcountrychoose);
+
         btn_Register = (Button)findViewById(R.id.btn_Register);
         login = (Button)findViewById(R.id.btn_login);
         imageViewProPic = (ImageView)findViewById(R.id.imProfile);
-        phno = (EditText)findViewById(R.id.phnootp);
+
     }
     private boolean check(){
         boolean result=false;
