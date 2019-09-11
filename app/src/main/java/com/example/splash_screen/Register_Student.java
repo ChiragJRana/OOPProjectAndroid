@@ -52,6 +52,7 @@ public class Register_Student extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register__student);
         setUiId();
+        //getSpinner();
         firebaseAuth = FirebaseAuth.getInstance();
         /*priorityList = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,priorityList);
@@ -63,7 +64,6 @@ public class Register_Student extends AppCompatActivity {
                 if(check()){
                     String user_Email = Email.getText().toString().trim();
                     String user_Password = Password.getText().toString().trim();
-
                     firebaseAuth.createUserWithEmailAndPassword(user_Email,user_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -132,6 +132,10 @@ public class Register_Student extends AppCompatActivity {
         result=true;
         return result;
     }
+    /*private void getSpinner(){
+        spcntcode.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,CountryData.countryNames));
+
+    }*/
     private String getRadioText(){
         int radioId = gender.getCheckedRadioButtonId();
         selectGender = findViewById(radioId);
