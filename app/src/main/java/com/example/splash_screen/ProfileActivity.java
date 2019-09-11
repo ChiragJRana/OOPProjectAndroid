@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,7 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ImageView profilePic;
     private TextView profileFN,profileLN,profileGender,profileEmail,profileStd,profileDOB;
-    private Button profileEdit;
+    private Button profileEdit,profilechangePassword;
     private FirebaseDatabase profileFirebaseDatabase;
     private FirebaseAuth profileFirebaseAuth;
 
@@ -32,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         setUi();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         profileFirebaseAuth = FirebaseAuth.getInstance();
         profileFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -62,6 +64,13 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(ProfileActivity.this,UpdateUserInfo.class));
             }
         });
+
+        profilechangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this,ChangePassword.class));
+            }
+        });
     }
 
     private void setUi(){
@@ -73,5 +82,16 @@ public class ProfileActivity extends AppCompatActivity {
         profileStd = (TextView)findViewById(R.id.tvStd);
         profileDOB = (TextView)findViewById(R.id.tvDOB);
         profileEdit = (Button)findViewById(R.id.btnEdit);
+        profilechangePassword = (Button)findViewById(R.id.btnchangepwd);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

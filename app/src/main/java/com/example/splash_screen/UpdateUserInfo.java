@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.icu.lang.UCharacterEnums;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ public class UpdateUserInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user_info);
         setUi();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         profileFirebaseAuth = FirebaseAuth.getInstance();
         profileFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -84,5 +86,15 @@ public class UpdateUserInfo extends AppCompatActivity {
         upStd = (EditText)findViewById(R.id.upetstd);
         upDob = (EditText)findViewById(R.id.upetdob);
         upSave = (Button)findViewById(R.id.upbtnsave);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

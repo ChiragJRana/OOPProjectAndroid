@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         setUi();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Reset_Pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,5 +58,14 @@ public class ForgotPassword extends AppCompatActivity {
         Email = (EditText) findViewById(R.id.et_email_forgot_pass);
         Reset_Pass = (Button)findViewById(R.id.btn_reset_pass);
         firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

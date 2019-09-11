@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -52,6 +53,7 @@ public class Register_Student extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register__student);
         setUiId();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSpinner();
         firebaseAuth = FirebaseAuth.getInstance();
         /*priorityList = new ArrayList<>();
@@ -168,5 +170,15 @@ public class Register_Student extends AppCompatActivity {
         //In the above line we might have given the name as the reference but there could have been multiple names creating problems in data manupilation...
         UserProfile userProfile = new UserProfile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString(),getRadioText());
         databaseReference.setValue(userProfile);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -21,6 +21,7 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         firebaseAuth = FirebaseAuth.getInstance();
         btn_logout = (Button)findViewById(R.id.btn_logout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
