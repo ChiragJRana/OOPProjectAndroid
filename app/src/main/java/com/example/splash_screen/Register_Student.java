@@ -1,9 +1,12 @@
 package com.example.splash_screen;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
@@ -19,13 +22,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +55,29 @@ public class Register_Student extends AppCompatActivity {
     private Button btn_Register;
     private Button login;
     private FirebaseAuth firebaseAuth;
+    private FirebaseStorage firebaseStorage;
     private ImageView imageViewProPic;
+    private static int PICK_IMAGE=123;
+    Uri imagePath;                              //Uri - Unique Resource Identifier...
+    private StorageReference storageReference;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK && data.getData()!=null){
+            imagePath = data.getData();
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imagePath);
+                imageViewProPic.setImageBitmap(bitmap);
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,10 +87,24 @@ public class Register_Student extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSpinner();
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
+
+        storageReference = firebaseStorage.getReference();
         /*priorityList = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,priorityList);
         spstd.setAdapter(adapter);
         spstd.setOnItemSelectedListener(this);*/
+        imageViewProPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");          //One can use application/* for all kinds of files like doc pdf etc
+                //One can user audio/* to support all kinds os audio...
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,"Select Image"),PICK_IMAGE);
+            }
+        });
+
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +140,6 @@ public class Register_Student extends AppCompatActivity {
         });
     }
     private void setUiId(){
-        heading = (TextView)findViewById(R.id.heading);
         FN = (EditText)findViewById(R.id.et_FN);
         LN = (EditText)findViewById(R.id.et_LN);
         Email = (EditText)findViewById(R.id.et_Email);
@@ -103,7 +147,7 @@ public class Register_Student extends AppCompatActivity {
         gender = (RadioGroup)findViewById(R.id.radioGroup);
         std = (TextView) findViewById(R.id.et_std);
         dob = (TextView)findViewById(R.id.et_dob);
-
+        imageViewProPic = (ImageView)findViewById(R.id.imProfile);
         btn_Register = (Button)findViewById(R.id.btn_Register);
         login = (Button)findViewById(R.id.btn_login);
         imageViewProPic = (ImageView)findViewById(R.id.imProfile);
@@ -129,6 +173,10 @@ public class Register_Student extends AppCompatActivity {
         }
         if(DOB.isEmpty()){
             Toast.makeText(this,"Please enter the date of birth",Toast.LENGTH_SHORT).show();
+            return result;
+        }
+        if(imagePath==null){
+            Toast.makeText(this,"Please select the image...",Toast.LENGTH_SHORT).show();
             return result;
         }
         result=true;
@@ -168,6 +216,21 @@ public class Register_Student extends AppCompatActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());                 //This getUid method is to get the User ID which is a hash value from the firebase...
         //In the above line we might have given the name as the reference but there could have been multiple names creating problems in data manupilation...
+        StorageReference imageReference = storageReference.child(firebaseAuth.getUid()).child("Images").child("Profile Pics");
+        //Here the data is stored in this manner on firebase Uid/Images/profile_pics.jpg...
+        //Here in the first child we can even specify audio... instead of Images...
+        UploadTask uploadTask = imageReference.putFile(imagePath);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Register_Student.this,"Unsuccessfull to uploaded image...",Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(Register_Student.this,"Successfully uploaded image...",Toast.LENGTH_SHORT).show();
+            }
+        });
         UserProfile userProfile = new UserProfile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString(),getRadioText());
         databaseReference.setValue(userProfile);
     }

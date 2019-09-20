@@ -48,9 +48,11 @@ public class HomePage extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.logoutMenu:{
                 Logout();
+                break;
             }
             case R.id.profileMenu:{
                 startActivity(new Intent(HomePage.this,ProfileActivity.class));
+                break;
             }
         }
         return super.onOptionsItemSelected(item);

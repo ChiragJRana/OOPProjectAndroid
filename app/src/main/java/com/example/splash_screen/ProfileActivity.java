@@ -3,7 +3,9 @@ package com.example.splash_screen;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,12 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -26,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button profileEdit,profilechangePassword;
     private FirebaseDatabase profileFirebaseDatabase;
     private FirebaseAuth profileFirebaseAuth;
+    private FirebaseStorage profileFirebaseStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +45,23 @@ public class ProfileActivity extends AppCompatActivity {
 
         profileFirebaseAuth = FirebaseAuth.getInstance();
         profileFirebaseDatabase = FirebaseDatabase.getInstance();
+        profileFirebaseStorage = FirebaseStorage.getInstance();
 
         DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference(profileFirebaseAuth.getUid());
+
+        StorageReference profileStorageReference = profileFirebaseStorage.getReference();
+        profileStorageReference.child(profileFirebaseAuth.getUid()).child("Images").child("Profile Pics").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                //profilePic.setImageUri(uri);              //We cannot implement this line since the data is in the form of a link so it cannot be assigned directly to the image view...
+                Picasso.get().load(uri).into(profilePic);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ProfileActivity.this,"Failed to download image...",Toast.LENGTH_LONG).show();
+            }
+        });      //This can also be replaced by child(...).child(...).
 
         profileDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
