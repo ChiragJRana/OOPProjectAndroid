@@ -45,7 +45,7 @@ public class ChangePassword extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(ChangePassword.this,"Password changed successfully",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChangePassword.this,"Password changed successfully...",Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                             else{
