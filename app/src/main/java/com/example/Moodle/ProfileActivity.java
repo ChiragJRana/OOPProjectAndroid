@@ -1,9 +1,8 @@
-package com.example.splash_screen;
+package com.example.Moodle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -54,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
                 //profilePic.setImageUri(uri);              //We cannot implement this line since the data is in the form of a link so it cannot be assigned directly to the image view...
-                Picasso.get().load(uri).into(profilePic);
+                Picasso.get().load(uri).placeholder(R.drawable.ic_launcher_foreground).into(profilePic);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

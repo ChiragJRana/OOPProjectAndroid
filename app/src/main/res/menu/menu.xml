@@ -28,7 +28,6 @@
         android:orderInCategory="400"
         app:showAsAction="never"
         android:title="Profile">
-
     </item>
 
 </menu>

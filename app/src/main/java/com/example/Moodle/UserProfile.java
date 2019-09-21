@@ -1,4 +1,4 @@
-package com.example.splash_screen;
+package com.example.Moodle;
 
 public class UserProfile {
     private String FName;

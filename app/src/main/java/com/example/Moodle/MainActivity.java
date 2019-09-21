@@ -1,4 +1,4 @@
-package com.example.splash_screen;
+package com.example.Moodle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 

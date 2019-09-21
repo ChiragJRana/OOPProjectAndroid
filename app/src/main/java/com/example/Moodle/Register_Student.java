@@ -1,4 +1,4 @@
-package com.example.splash_screen;
+package com.example.Moodle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,7 +34,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Register_Student extends AppCompatActivity {
