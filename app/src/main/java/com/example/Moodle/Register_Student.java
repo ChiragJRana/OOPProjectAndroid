@@ -82,7 +82,7 @@ public class Register_Student extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register__student);
         setUiId();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSpinner();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
@@ -133,7 +133,7 @@ public class Register_Student extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Register_Student.this,MainActivity.class);
                 startActivity(intent);
-                Register_Student.this.finish();
+                //Register_Student.this.finish();
             }
         });
     }
@@ -200,7 +200,7 @@ public class Register_Student extends AppCompatActivity {
                         uploadUserData();
                         Toast.makeText(Register_Student.this,"Successfully Registered.Verification email sent",Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
-                        finish();
+                        //finish();
                         startActivity(new Intent(Register_Student.this,MainActivity.class));
                     }else{
                         Toast.makeText(Register_Student.this,"Network problem",Toast.LENGTH_SHORT).show();

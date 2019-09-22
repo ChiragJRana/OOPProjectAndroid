@@ -17,13 +17,13 @@ public class Select_User extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select__user);
         setUi();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         std.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Select_User.this,Register_Student.class);
                 startActivity(intent);
-                Select_User.this.finish();
+                //Select_User.this.finish();
             }
         });
         org.setOnClickListener(new View.OnClickListener() {
@@ -31,7 +31,7 @@ public class Select_User extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Select_User.this,Register_Organiser.class);
                 startActivity(intent);
-                Select_User.this.finish();
+                //Select_User.this.finish();
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +39,7 @@ public class Select_User extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Select_User.this,MainActivity.class);
                 startActivity(intent);
-                Select_User.this.finish();
+                //Select_User.this.finish();
             }
         });
     }

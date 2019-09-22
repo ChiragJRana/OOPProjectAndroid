@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     validate(Email.getText().toString(), Password.getText().toString());
 
                 }
+
             }
         });
 
@@ -69,14 +70,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Select_User.class);
                 startActivity(intent);
-                MainActivity.this.finish();
+                //MainActivity.this.finish();
             }
         });
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,ForgotPassword.class));
-                MainActivity.this.finish();
+                //MainActivity.this.finish();
             }
         });
     }
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    finish();
+                    //finish();
                     /*Toast.makeText(MainActivity.this, "Successful Login", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, HomePage.class));*/
                     checkEmailVerification();
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         Boolean check = firebaseUser.isEmailVerified();
 
         if(check){
-            finish();
+            //finish();
             startActivity(new Intent(MainActivity.this,HomePage.class));
         }else{
             Toast.makeText(this,"Please verify the email",Toast.LENGTH_SHORT).show();;

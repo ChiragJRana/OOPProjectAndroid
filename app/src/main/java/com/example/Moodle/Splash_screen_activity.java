@@ -19,7 +19,10 @@ public class Splash_screen_activity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_splash_screen_activity);       //This is to load the activity specified...
+
         getSupportActionBar().hide();                                     //This hides the action bar...
+
+
         LogoLauncher logoLauncher = new LogoLauncher();
         logoLauncher.start();                                            //Gave the command to start the process...
     }
