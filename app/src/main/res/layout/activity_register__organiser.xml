@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register_Organiser">
+    tools:context=".Register_Organiser"
+    android:background="@drawable/background_theme">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_com_list"

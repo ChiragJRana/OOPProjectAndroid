@@ -17,9 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String FN;
     private EditText Email;
     private EditText Password;
     private Button LoginBtn;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private int counter=5;
     private TextView forgotPassword;
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (check()) {            //Check the methods first get the text and then convert it to string...
                     validate(Email.getText().toString(), Password.getText().toString());
-
                 }
 
             }
@@ -129,7 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(check){
             //finish();
-            startActivity(new Intent(MainActivity.this,HomePage.class));
+            Intent intent = new Intent(MainActivity.this,HomePage.class);
+            //Here FN is my string...
+            startActivity(intent);
         }else{
             Toast.makeText(this,"Please verify the email",Toast.LENGTH_SHORT).show();;
             firebaseAuth.signOut();

@@ -36,9 +36,40 @@ public class Register_Organiser extends AppCompatActivity{
     }
     private void getManualData(){
         List<Commitiesname> com_list = new ArrayList<>(10);
-        for(long i=0;i<10;i++){
+        for(int i=0;i<10;i++){
             Commitiesname com_name =new Commitiesname();
-            com_name.setCommit_name(" ");
+            switch(i){
+                case 0:
+                    com_name.setCommit_name("CSI");
+                    break;
+                case 1:
+                    com_name.setCommit_name("FACE");
+                    break;
+                case 2:
+                    com_name.setCommit_name("IEEE");
+                    break;
+                case 3:
+                    com_name.setCommit_name("WIE");
+                    break;
+                case 4:
+                    com_name.setCommit_name("Coding club");
+                    break;
+                case 5:
+                    com_name.setCommit_name("SPORTS");
+                    break;
+                case 6:
+                    com_name.setCommit_name("ROBOT");
+                    break;
+                case 7:
+                    com_name.setCommit_name("Student Council");
+                    break;
+                case 8:
+                    com_name.setCommit_name(" ");
+                    break;
+                case 9:
+                    com_name.setCommit_name(" ");
+                    break;
+            }
             com_list.add(com_name);
         }
         c_adapter.setData(com_list);

@@ -47,8 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
         profileFirebaseStorage = FirebaseStorage.getInstance();
 
         DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference(profileFirebaseAuth.getUid());
-
         StorageReference profileStorageReference = profileFirebaseStorage.getReference();
+
         profileStorageReference.child(profileFirebaseAuth.getUid()).child("Images").child("Profile Pics").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

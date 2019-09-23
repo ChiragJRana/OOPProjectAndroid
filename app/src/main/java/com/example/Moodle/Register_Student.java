@@ -70,8 +70,6 @@ public class Register_Student extends AppCompatActivity {
             catch(IOException e){
                 e.printStackTrace();
             }
-
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -201,7 +199,12 @@ public class Register_Student extends AppCompatActivity {
                         Toast.makeText(Register_Student.this,"Successfully Registered.Verification email sent",Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         //finish();
-                        startActivity(new Intent(Register_Student.this,MainActivity.class));
+                        Intent intent = new Intent(Register_Student.this,MainActivity.class);
+                        //intent.putExtra("Name",FN.getText().toString());    This line is logically not correct
+                        //As tis line would given the name in the title bar once on the creation of the user but not
+                        //when the user loggs in after logging out
+                        //Since this line fetches data from the Register_student.class and not from the fire-base...
+                        startActivity(intent);
                     }else{
                         Toast.makeText(Register_Student.this,"Network problem",Toast.LENGTH_SHORT).show();
                     }
