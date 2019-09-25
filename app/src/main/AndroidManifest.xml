@@ -9,23 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.Moodle.ChangePassword"></activity>
-        <activity android:name="com.example.Moodle.UpdateUserInfo" />
-        <activity android:name="com.example.Moodle.OTPVerification" />
-        <activity android:name="com.example.Moodle.ProfileActivity" />
-        <activity android:name="com.example.Moodle.ForgotPassword" />
-        <activity android:name="com.example.Moodle.Register_Organiser" />
-        <activity android:name="com.example.Moodle.Select_User" />
-        <activity android:name="com.example.Moodle.Register_Student" />
-        <activity android:name="com.example.Moodle.HomePage" />
-        <activity android:name="com.example.Moodle.Splash_screen_activity">
+        <activity android:name=".Login_Organiser"></activity>
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".UpdateUserInfo" />
+        <activity android:name=".OTPVerification" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".See_Organiser" />
+        <activity android:name=".Select_User" />
+        <activity android:name=".Register_Student" />
+        <activity android:name=".HomePage" />
+        <activity android:name=".Splash_screen_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.Moodle.MainActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -29,7 +29,7 @@ public class Select_User extends AppCompatActivity {
         org.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Select_User.this,Register_Organiser.class);
+                Intent intent = new Intent(Select_User.this, See_Organiser.class);
                 startActivity(intent);
                 //Select_User.this.finish();
             }

@@ -8,15 +8,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Register_Organiser extends AppCompatActivity{
+public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNoteListner{
     private RecyclerView recyclerView;
     private C_Adapter c_adapter;
     private static final String TAG="";
+    private EditText inset_posi;
+    private EditText del_posi;
+    private Button inset_btn;
+    private Button del_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,25 +33,49 @@ public class Register_Organiser extends AppCompatActivity{
         getId();
         init();
         getManualData();
+
+        inset_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(See_Organiser.this,Login_Organiser.class);
+                startActivity(intent);
+            }
+        });
+
+        del_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+    public void insertItem(int position){
+
+    }
+    public void deleteItem(int position){
+
     }
 
     private void getId(){
         recyclerView = findViewById(R.id.rv_com_list);
+        inset_btn = findViewById(R.id.btn_insert);
+        del_btn = findViewById(R.id.btn_del);
     }
     private void init(){
-        c_adapter = new C_Adapter(this);
+        c_adapter = new C_Adapter(this,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(c_adapter);
     }
     private void getManualData(){
         List<Commitiesname> com_list = new ArrayList<>(10);
-        for(int i=0;i<10;i++){
+        for(int i=0;i<1;i++){
             Commitiesname com_name =new Commitiesname();
             switch(i){
                 case 0:
                     com_name.setCommit_name("CSI");
                     break;
-                case 1:
+                /*case 1:
                     com_name.setCommit_name("FACE");
                     break;
                 case 2:
@@ -68,10 +101,17 @@ public class Register_Organiser extends AppCompatActivity{
                     break;
                 case 9:
                     com_name.setCommit_name(" ");
-                    break;
+                    break;*/
             }
             com_list.add(com_name);
         }
         c_adapter.setData(com_list);
+    }
+
+
+    @Override
+    public void onNoteClick(int position) {
+        Intent intent = new Intent(this,Login_Organiser.class);
+        startActivity(intent);
     }
 }

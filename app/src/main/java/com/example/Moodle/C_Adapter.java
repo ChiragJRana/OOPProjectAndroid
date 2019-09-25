@@ -26,11 +26,13 @@ public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
     private LayoutInflater layoutInflater;
     private Context context;
     private final String Tag="C_Adapter";
+    private OnNoteListner onNoteListner;
 
-    public C_Adapter(Context context){
+    public C_Adapter(Context context,OnNoteListner onNoteListner){
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         commitiesnames = new ArrayList<>();
+        this.onNoteListner = onNoteListner;
     }
     public void setData(List<Commitiesname> commitiesnames){
         this.commitiesnames.clear();
@@ -47,7 +49,7 @@ public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.commities_name,parent,false);
         Log.e(TAG,"OnCreateViewHolder");
-        return new ChatViewHolder(view);
+        return new ChatViewHolder(view,onNoteListner);
     }
 
     @Override
@@ -61,14 +63,16 @@ public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
         return commitiesnames.size();
     }
 
-    public class ChatViewHolder extends RecyclerView.ViewHolder{
+    public class ChatViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView imageView;
         private TextView text_com_name;
+        OnNoteListner onNoteListner;
 
-        public ChatViewHolder(@NonNull View view){
+        public ChatViewHolder(@NonNull View view,OnNoteListner onNoteListner){
             super(view);
             imageView = view.findViewById(R.id.com_logo);
             text_com_name = view.findViewById(R.id.com_name);
+            this.onNoteListner = onNoteListner;
         }
         public void bind(){
             int position = getAdapterPosition();
@@ -78,5 +82,13 @@ public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
                 //Toast.makeText(context, "Could not upload image currently...", Toast.LENGTH_SHORT).show();
             }
         }
+        @Override
+        public void onClick(View view) {
+            onNoteListner.onNoteClick(getAdapterPosition());                            //This gets the exact position of the point where there was a click...
+        }
+    }
+
+    public interface OnNoteListner{
+        void onNoteClick(int position);
     }
 }
