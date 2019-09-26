@@ -35,7 +35,7 @@ public class Splash_screen_activity extends AppCompatActivity {
             catch(InterruptedException e){
                 e.printStackTrace();
         }
-            Intent intent = new Intent(Splash_screen_activity.this,MainActivity.class);
+            Intent intent = new Intent(Splash_screen_activity.this, App_Home_Page.class);
             startActivity(intent);
             Splash_screen_activity.this.finish();                               //To prevent coming to the same activity again...Hence destroying it...
     }

@@ -37,7 +37,7 @@ public class Select_User extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Select_User.this,MainActivity.class);
+                Intent intent = new Intent(Select_User.this, Login_Student.class);
                 startActivity(intent);
                 //Select_User.this.finish();
             }

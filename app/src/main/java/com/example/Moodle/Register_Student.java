@@ -115,7 +115,7 @@ public class Register_Student extends AppCompatActivity {
                                 /*Toast.makeText(Register_Student.this,"Registration successful",Toast.LENGTH_SHORT).show();*/
                             }else{
                                 Toast.makeText(Register_Student.this,"Registration Unsuccessful",Toast.LENGTH_SHORT).show();
-                                /*Intent intent = new Intent(Register_Student.this,MainActivity.class);
+                                /*Intent intent = new Intent(Register_Student.this,Login_Student.class);
                                 startActivity(intent);
                                 Register_Student.this.finish();*/
                             }
@@ -129,7 +129,7 @@ public class Register_Student extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Register_Student.this,MainActivity.class);
+                Intent intent = new Intent(Register_Student.this, Login_Student.class);
                 startActivity(intent);
                 //Register_Student.this.finish();
             }
@@ -199,7 +199,7 @@ public class Register_Student extends AppCompatActivity {
                         Toast.makeText(Register_Student.this,"Successfully Registered.Verification email sent",Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         //finish();
-                        Intent intent = new Intent(Register_Student.this,MainActivity.class);
+                        Intent intent = new Intent(Register_Student.this, Login_Student.class);
                         //intent.putExtra("Name",FN.getText().toString());    This line is logically not correct
                         //As tis line would given the name in the title bar once on the creation of the user but not
                         //when the user loggs in after logging out

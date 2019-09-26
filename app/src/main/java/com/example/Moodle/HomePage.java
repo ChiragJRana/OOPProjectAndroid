@@ -59,7 +59,7 @@ public class HomePage extends AppCompatActivity {
     private void Logout(){
         firebaseAuth.signOut();
         finish();
-        startActivity(new Intent(HomePage.this,MainActivity.class));
+        startActivity(new Intent(HomePage.this, Login_Student.class));
     }
 
     @Override

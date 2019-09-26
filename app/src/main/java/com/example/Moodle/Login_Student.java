@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class Login_Student extends AppCompatActivity {
 
     private String FN;
     private EditText Email;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             finish();
-            startActivity(new Intent(MainActivity.this, HomePage.class));                        //Here start activity is very important since without start we cannot jump to the next activity...
+            startActivity(new Intent(Login_Student.this, HomePage.class));                        //Here start activity is very important since without start we cannot jump to the next activity...
         }
 
         //progress dialogue
@@ -70,16 +70,16 @@ public class MainActivity extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Select_User.class);
+                Intent intent = new Intent(Login_Student.this, Register_Student.class);
                 startActivity(intent);
-                //MainActivity.this.finish();
+                //Login_Student.this.finish();
             }
         });
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,ForgotPassword.class));
-                //MainActivity.this.finish();
+                startActivity(new Intent(Login_Student.this,ForgotPassword.class));
+                //Login_Student.this.finish();
             }
         });
     }
@@ -109,11 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
                     //finish();
-                    /*Toast.makeText(MainActivity.this, "Successful Login", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, HomePage.class));*/
+                    /*Toast.makeText(Login_Student.this, "Successful Login", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Login_Student.this, HomePage.class));*/
                     checkEmailVerification();
                 } else {
-                    Toast.makeText(MainActivity.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login_Student.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                     counter--;
                     Info.setText("Number of attempts remaining are: "+counter);
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(check){
             //finish();
-            Intent intent = new Intent(MainActivity.this,HomePage.class);
+            Intent intent = new Intent(Login_Student.this,HomePage.class);
             //Here FN is my string...
             startActivity(intent);
         }else{
