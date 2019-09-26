@@ -4,11 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +32,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
         inset_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(See_Organiser.this,Login_Organiser.class);
+                Intent intent = new Intent(See_Organiser.this,Register_Organiser.class);
                 startActivity(intent);
             }
         });
@@ -45,7 +40,8 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
         del_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(See_Organiser.this,Delete_Organiser.class);
+                startActivity(intent);
             }
         });
     }
@@ -111,7 +107,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
 
     @Override
     public void onNoteClick(int position) {
-        Intent intent = new Intent(this,Login_Organiser.class);
+        Intent intent = new Intent(this, Register_Organiser.class);
         startActivity(intent);
     }
 }

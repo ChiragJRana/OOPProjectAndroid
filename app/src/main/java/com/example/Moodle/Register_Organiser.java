@@ -29,7 +29,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
-public class Login_Organiser extends AppCompatActivity {
+public class Register_Organiser extends AppCompatActivity {
 
     private EditText com_name;
     private EditText com_email;
@@ -86,10 +86,10 @@ public class Login_Organiser extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 sendVerificationEmail();
-                                Toast.makeText(Login_Organiser.this, "Success...Verification email send to your email account...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register_Organiser.this, "Success...Verification email send to your email account...", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                Toast.makeText(Login_Organiser.this, "Failed...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register_Organiser.this, "Failed...", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -164,10 +164,10 @@ public class Login_Organiser extends AppCompatActivity {
                     if(task.isSuccessful()){
                         uploadUserData();
                         firebaseAuth_com_email.signOut();
-                        Intent intent = new Intent(Login_Organiser.this,See_Organiser.class);
+                        Intent intent = new Intent(Register_Organiser.this,See_Organiser.class);
                     }
                     else{
-                        Toast.makeText(Login_Organiser.this, "Could not upload the data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register_Organiser.this, "Could not upload the data", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -181,7 +181,7 @@ public class Login_Organiser extends AppCompatActivity {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Login_Organiser.this, "Could not upload the image...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Register_Organiser.this, "Could not upload the image...", Toast.LENGTH_SHORT).show();
             }
         });
     }
