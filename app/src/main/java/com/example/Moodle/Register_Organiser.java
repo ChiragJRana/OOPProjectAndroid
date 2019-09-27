@@ -184,5 +184,7 @@ public class Register_Organiser extends AppCompatActivity {
                 Toast.makeText(Register_Organiser.this, "Could not upload the image...", Toast.LENGTH_SHORT).show();
             }
         });
+        Organiser_Profile organiser_profile = new Organiser_Profile(com_name.getText().toString(),com_email.getText().toString());
+        databaseReference.setValue(organiser_profile);
     }
 }
