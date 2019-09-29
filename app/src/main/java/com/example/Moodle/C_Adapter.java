@@ -5,16 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.Moodle.Commitiesname;
-import com.example.Moodle.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +17,7 @@ import java.util.List;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
-    private List<Commitiesname> commitiesnames;
+    private List<Commitee_Profile> commitiesnames;
     private LayoutInflater layoutInflater;
     private Context context;
     private final String Tag="C_Adapter";
@@ -34,12 +29,18 @@ public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
         commitiesnames = new ArrayList<>();
         this.onNoteListner = onNoteListner;
     }
-    public void setData(List<Commitiesname> commitiesnames){
+    public C_Adapter(Context context,List commitiesnames){
+        this.context = context;
+        layoutInflater = LayoutInflater.from(context);
+        commitiesnames = new ArrayList<>();
+        //this.onNoteListner = onNoteListner;
+    }
+    public void setData(List<Commitee_Profile> commitiesnames){
         this.commitiesnames.clear();
         this.commitiesnames.addAll(commitiesnames);
         notifyDataSetChanged();
     }
-    public void addData(List<Commitiesname> commitiesnames){
+    public void addData(List<Commitee_Profile> commitiesnames){
         this.commitiesnames.addAll(commitiesnames);
         notifyDataSetChanged();
     }
@@ -76,7 +77,7 @@ public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
         }
         public void bind(){
             int position = getAdapterPosition();
-            Commitiesname com_posi = commitiesnames.get(position);
+            Commitee_Profile com_posi = commitiesnames.get(position);
             text_com_name.setText(com_posi.getCommit_name());
             if(com_posi.getCommit_img()==null){
                 //Toast.makeText(context, "Could not upload image currently...", Toast.LENGTH_SHORT).show();

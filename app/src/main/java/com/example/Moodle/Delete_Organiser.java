@@ -70,9 +70,14 @@ public class Delete_Organiser extends AppCompatActivity {
         auth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String com_e = com_email.getText().toString();
-                String com_p = com_pass.getText().toString();
-                validate(com_e,com_p);
+                if(check()){
+                    String com_e = com_email.getText().toString();
+                    String com_p = com_pass.getText().toString();
+                    validate(com_e,com_p);
+                }
+                else{
+                    Toast.makeText(Delete_Organiser.this, "Please enter the required credentials...", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -110,5 +115,25 @@ public class Delete_Organiser extends AppCompatActivity {
                 }
             }
         });
+    }
+    private boolean check(){
+        String com_n = com_name.getText().toString();
+        String com_e = com_email.getText().toString();
+        String com_p = com_pass.getText().toString();
+        if(com_e.isEmpty()){
+            //com_email.setError("Error");
+            return false;
+        }
+        else if(com_p.isEmpty()){
+            //com_pass.setError("Error");
+            return false;
+        }
+        else if(com_n.isEmpty()){
+            //com_name.setError("Error");
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.Moodle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,13 +22,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Register_Organiser extends AppCompatActivity {
 
@@ -43,6 +48,9 @@ public class Register_Organiser extends AppCompatActivity {
     private Button add_com;
     Uri imagePath;
     private static int PICK_IMAGE=123;
+    ArrayList<Commitee_Profile> list;
+    RecyclerView recyclerView;
+    C_Adapter c_adapter;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -87,6 +95,7 @@ public class Register_Organiser extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 sendVerificationEmail();
                                 Toast.makeText(Register_Organiser.this, "Success...Verification email send to your email account...", Toast.LENGTH_SHORT).show();
+
                             }
                             else{
                                 Toast.makeText(Register_Organiser.this, "Failed...", Toast.LENGTH_SHORT).show();
@@ -94,6 +103,28 @@ public class Register_Organiser extends AppCompatActivity {
                         }
                     });
                 }
+
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
+                            Commitee_Profile commitee_profile = dataSnapshot1.getValue(Commitee_Profile.class);
+                            list.add(commitee_profile);
+                        }
+                            c_adapter = new C_Adapter(Register_Organiser.this,list);
+                            recyclerView.setAdapter(c_adapter);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                Intent intent = new Intent(Register_Organiser.this,See_Organiser.class);
+                startActivity(intent);
+                /*intent.putExtra("CN",com_name.getText().toString());
+                intent.putExtra("CE",com_email.getText().toString());
+                intent.putExtra("CP",com_pass.getText().toString());*/
             }
         });
 
