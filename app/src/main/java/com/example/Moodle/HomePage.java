@@ -36,8 +36,8 @@ public class HomePage extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                setTitle("Welcome "+userProfile.getFName()+" "+userProfile.getLName());
+                UserProfile userProfile = dataSnapshot.child("Students").getValue(UserProfile.class);
+                //setTitle("Welcome "+userProfile.getFName()+" "+userProfile.getLName());
             }
 
             @Override

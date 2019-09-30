@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +42,7 @@ public class UpdateUserInfo extends AppCompatActivity {
     private FirebaseStorage profileFirebaseStorage;
     private static int PICK_IMAGE=123;
     Uri imagePath;                              //Uri - Unique Resource Identifier...
-
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -71,10 +72,12 @@ public class UpdateUserInfo extends AppCompatActivity {
         profileFirebaseDatabase = FirebaseDatabase.getInstance();
         profileFirebaseStorage = FirebaseStorage.getInstance();
 
-        final DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference(profileFirebaseAuth.getUid());
+        firebaseUser = profileFirebaseAuth.getCurrentUser();
+
+        final DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference(firebaseUser.getUid());
 
         final StorageReference profileStorageReference = profileFirebaseStorage.getReference();         //This need to be declared final since this is been accessed by the inner class...
-        profileStorageReference.child(profileFirebaseAuth.getUid()).child("Images").child("Profile Pics").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        profileStorageReference.child(firebaseUser.getUid()).child("Images").child("Profile Pics").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 //profilePic.setImageUri(uri);              //We cannot implement this line since the data is in the form of a link so it cannot be assigned directly to the image view...
@@ -89,7 +92,7 @@ public class UpdateUserInfo extends AppCompatActivity {
         profileDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                UserProfile userProfile = dataSnapshot.child("Students").child(firebaseUser.getUid()).getValue(UserProfile.class);
                 upFn.setText(userProfile.getFName());
                 upLn.setText(userProfile.getLName());
                 upGen.setText(userProfile.getGender());
@@ -116,7 +119,7 @@ public class UpdateUserInfo extends AppCompatActivity {
 
                 UserProfile userProfile = new UserProfile(upFN,upLN,upEMAIl,upSTD,upDOB,upGEN);
 
-                profileDatabaseReference.setValue(userProfile);
+                profileDatabaseReference.child("Students").setValue(userProfile);
 
                 StorageReference imageReference = profileStorageReference.child(profileFirebaseAuth.getUid()).child("Images").child("Profile Pics");
                 //Here the data is stored in this manner on firebase Uid/Images/profile_pics.jpg...

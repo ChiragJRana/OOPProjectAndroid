@@ -58,6 +58,7 @@ public class Register_Student extends AppCompatActivity {
     private static int PICK_IMAGE=123;
     Uri imagePath;                              //Uri - Unique Resource Identifier...
     private StorageReference storageReference;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -215,9 +216,10 @@ public class Register_Student extends AppCompatActivity {
 
     private void uploadUserData(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());                 //This getUid method is to get the User ID which is a hash value from the firebase...
+        DatabaseReference databaseReference = firebaseDatabase.getReference();                 //This getUid method is to get the User ID which is a hash value from the firebase...
         //In the above line we might have given the name as the reference but there could have been multiple names creating problems in data manupilation...
-        StorageReference imageReference = storageReference.child(firebaseAuth.getUid()).child("Images").child("Profile Pics");
+        firebaseUser = firebaseAuth.getCurrentUser();
+        StorageReference imageReference = storageReference.child("Student Images").child(firebaseUser.getUid());
         //Here the data is stored in this manner on firebase Uid/Images/profile_pics.jpg...
         //Here in the first child we can even specify audio... instead of Images...
         UploadTask uploadTask = imageReference.putFile(imagePath);
@@ -233,7 +235,7 @@ public class Register_Student extends AppCompatActivity {
             }
         });
         UserProfile userProfile = new UserProfile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString(),getRadioText());
-        databaseReference.setValue(userProfile);
+        databaseReference.child("Students").child(firebaseAuth.getUid()).setValue(userProfile);
     }
 
     @Override

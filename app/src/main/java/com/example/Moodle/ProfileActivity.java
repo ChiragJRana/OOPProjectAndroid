@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseDatabase profileFirebaseDatabase;
     private FirebaseAuth profileFirebaseAuth;
     private FirebaseStorage profileFirebaseStorage;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,12 @@ public class ProfileActivity extends AppCompatActivity {
         profileFirebaseDatabase = FirebaseDatabase.getInstance();
         profileFirebaseStorage = FirebaseStorage.getInstance();
 
-        DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference(profileFirebaseAuth.getUid());
+        DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference();
         StorageReference profileStorageReference = profileFirebaseStorage.getReference();
 
-        profileStorageReference.child(profileFirebaseAuth.getUid()).child("Images").child("Profile Pics").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        firebaseUser = profileFirebaseAuth.getCurrentUser();
+
+        profileStorageReference.child("Student Images").child(firebaseUser.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 //profilePic.setImageUri(uri);              //We cannot implement this line since the data is in the form of a link so it cannot be assigned directly to the image view...
@@ -65,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                UserProfile userProfile = dataSnapshot.child("Students").child(firebaseUser.getUid()).getValue(UserProfile.class);
                 profileFN.setText("FName: "+userProfile.getFName());
                 profileLN.setText("LName: "+userProfile.getLName());
                 profileGender.setText("Gender: "+userProfile.getGender());
