@@ -15,7 +15,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-
         android:text="Welcome to login screen..."
         android:textSize="20dp"
         android:textColor="@color/color_start"

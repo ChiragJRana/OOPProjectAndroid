@@ -22,11 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -44,6 +41,7 @@ public class Register_Organiser extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase_com_data;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
+    private FirebaseUser firebaseUser_com;
     private ImageView imageView_com_img;
     private Button add_com;
     Uri imagePath;
@@ -70,7 +68,7 @@ public class Register_Organiser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login__organiser);
+        setContentView(R.layout.activity_regitser_organiser);
         getId();
 
         firebaseAuth_com_email = FirebaseAuth.getInstance();
@@ -104,27 +102,9 @@ public class Register_Organiser extends AppCompatActivity {
                     });
                 }
 
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                            Commitee_Profile commitee_profile = dataSnapshot1.getValue(Commitee_Profile.class);
-                            list.add(commitee_profile);
-                        }
-                            c_adapter = new C_Adapter(Register_Organiser.this,list);
-                            recyclerView.setAdapter(c_adapter);
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                Intent intent = new Intent(Register_Organiser.this,See_Organiser.class);
-                startActivity(intent);
-                /*intent.putExtra("CN",com_name.getText().toString());
-                intent.putExtra("CE",com_email.getText().toString());
-                intent.putExtra("CP",com_pass.getText().toString());*/
+                /*Intent intent = new Intent(Register_Organiser.this,See_Organiser.class);
+                startActivity(intent);*/
             }
         });
 
@@ -206,8 +186,8 @@ public class Register_Organiser extends AppCompatActivity {
     }
 
     private void uploadUserData(){
-        databaseReference = firebaseDatabase_com_data.getReference(firebaseAuth_com_email.getUid());
-        StorageReference imageReference = storageReference.child(firebaseAuth_com_email.getUid()).child("Images").child("Profile Pics");
+        firebaseUser_com = firebaseAuth_com_email.getCurrentUser();
+        StorageReference imageReference = storageReference.child("Committee Images").child(firebaseUser_com.getUid());
         UploadTask uploadTask = imageReference.putFile(imagePath);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -216,6 +196,6 @@ public class Register_Organiser extends AppCompatActivity {
             }
         });
         Organiser_Profile organiser_profile = new Organiser_Profile(com_name.getText().toString(),com_email.getText().toString());
-        databaseReference.setValue(organiser_profile);
+        databaseReference.child("Organisers").child(firebaseUser_com.getUid()).setValue(organiser_profile);
     }
 }

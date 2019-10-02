@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Delete_Organiser"></activity>
+        <activity android:name=".Verify_Orgniser"></activity>
+        <activity android:name=".Delete_Organiser" />
         <activity android:name=".Login_Student" />
         <activity android:name=".Register_Organiser" />
         <activity android:name=".ChangePassword" />
@@ -28,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".App_Home_Page"></activity>
+        <activity android:name=".App_Home_Page" />
     </application>
 
 </manifest>

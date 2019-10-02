@@ -6,17 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +33,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
     private static final String TAG="";
     private Button inset_btn;
     private Button del_btn;
+    private Button go;
     private String cn;
     private ImageView profilepic;
 
@@ -47,17 +41,20 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
     private FirebaseUser firebaseUser;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register__organiser);
+        setContentView(R.layout.activity_see_all_organiser);
         getId();
         init();
-        com_list = new ArrayList<>();
 
 
+        //firebaseUser = firebaseAuth.getCurrentUser();
+        //final String currentUserId = firebaseUser.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Organisers");
         //getManualData();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -84,12 +81,18 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
             }
         });
 
-
+        /*go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(See_Organiser.this,Verify_Orgniser.class);
+                startActivity(intent);
+            }
+        });*/
 
     }
 
     public void insertItem(){
-        getDynamicData();
+        //getDynamicData();
         /*Intent intentCaller = getIntent();
         String cn = intentCaller.getStringExtra("CN");
         String ce = intentCaller.getStringExtra("CE");
@@ -103,9 +106,10 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
         recyclerView = findViewById(R.id.rv_com_list);
         inset_btn = findViewById(R.id.btn_insert);
         del_btn = findViewById(R.id.btn_del);
+        go = findViewById(R.id.btn_org_detail);
     }
     private void init(){
-        c_adapter = new C_Adapter(this,this);
+        c_adapter = new C_Adapter(this,com_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(c_adapter);
     }
@@ -149,16 +153,66 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
         c_adapter.setData(com_list);
     }*/
 
-    private void getDynamicData(){
+    /*private void getDynamicData(){
         Commitee_Profile commitiesname = new Commitee_Profile("");
         commitiesname.setCommit_name(cn);
         //commitiesname.setCommit_img(Picasso.get().load(uri));
-    }
+    }*/
 
 
     @Override
     public void onNoteClick(int position) {
         Intent intent = new Intent(this, Register_Organiser.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        /*Firebasere<Organiser_Profile,> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Organiser_Profile,>
+                (Organiser_Profile.class,R.layout.single_organiser_layout,firebaseDatabase){
+            @Override
+            protected void populateViewHolder(){
+
+               }
+        };*/
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                com_list = new ArrayList<Commitee_Profile>();
+                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
+                    /*firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    try{
+                        final String userId = firebaseUser.getUid();
+                        if(dataSnapshot.getKey().equals(userId)){
+                            Commitee_Profile commitee_profile = dataSnapshot1.getValue(Commitee_Profile.class);
+                            com_list.add(commitee_profile);
+                        }
+                    }catch(NullPointerException e){
+                        e.printStackTrace();
+                    }*/
+
+                    /*firebaseUser = firebaseAuth.getCurrentUser();
+                    int uid = Integer.parseInt(firebaseUser.getUid());*/
+                    //Commitee_Profile commitee_profile =  new Commitee_Profile();
+                    Commitee_Profile commitee_profile = dataSnapshot1.getValue(Commitee_Profile.class);
+                    //String name = commitee_profile.getCommit_name();
+                    //commitee_profile.setCommit_name(name);
+                    com_list.add(commitee_profile);
+                    /*String name = commitee_profile.getCommit_name();
+                    commitee_profile.setCommit_name(name);*/
+                    //commitee_profile.getCommit_img();
+
+                }
+                c_adapter.setData(com_list);
+                /*c_adapter = new C_Adapter(See_Organiser.this,com_list);
+                recyclerView.setAdapter(c_adapter);*/
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

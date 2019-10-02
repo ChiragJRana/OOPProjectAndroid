@@ -235,7 +235,7 @@ public class Register_Student extends AppCompatActivity {
             }
         });
         UserProfile userProfile = new UserProfile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString(),getRadioText());
-        databaseReference.child("Students").child(firebaseAuth.getUid()).setValue(userProfile);
+        databaseReference.child("Students").child(firebaseUser.getUid()).setValue(userProfile);
     }
 
     @Override
