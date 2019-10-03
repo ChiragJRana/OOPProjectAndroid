@@ -3,6 +3,7 @@ package com.example.Moodle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -89,6 +91,7 @@ public class Delete_Organiser extends AppCompatActivity {
                 }
                 else{
                     delete.setEnabled(true);
+
                 }
             }
         });
@@ -106,8 +109,18 @@ public class Delete_Organiser extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
-                    Toast.makeText(Delete_Organiser.this, "Successfully Deleted...", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Delete_Organiser.this, "Successfully Deleted...", Toast.LENGTH_SHORT).show();
                     delete.setEnabled(true);
+                    //firebaseUser = firebaseAuth.getCurrentUser();
+                    databaseReference.child(firebaseAuth.getUid()).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Delete_Organiser.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Delete_Organiser.this,See_Organiser.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
                 }
                 else{
                     Toast.makeText(Delete_Organiser.this, "Please try again...", Toast.LENGTH_SHORT).show();

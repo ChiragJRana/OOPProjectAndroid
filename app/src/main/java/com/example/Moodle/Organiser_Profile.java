@@ -6,8 +6,6 @@ public class Organiser_Profile {
 
     private String com_name,com_email;
 
-
-
     public Organiser_Profile(String com_name, String com_email) {
         this.com_name = com_name;
         this.com_email = com_email;

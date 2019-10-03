@@ -1,6 +1,7 @@
 package com.example.Moodle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,9 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +39,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
     private Button go;
     private String cn;
     private ImageView profilepic;
+    private TextView com_name;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -54,7 +58,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
 
         //firebaseUser = firebaseAuth.getCurrentUser();
         //final String currentUserId = firebaseUser.getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Organisers");
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         //getManualData();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -63,6 +67,53 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
 
         //DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
         StorageReference storageReference = firebaseStorage.getReference();
+
+        /*databaseReference.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                com_list = new ArrayList<>();
+                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
+                    firebaseUser = firebaseAuth.getCurrentUser();
+                    Commitee_Profile commitee_profile = dataSnapshot1.child("Organisers").child(firebaseUser.getUid()).getValue(Commitee_Profile.class);
+                    com_name.setText(commitee_profile.getCommit_name());
+                    com_list.add(commitee_profile);
+                }
+                c_adapter.setData(com_list);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         inset_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +157,8 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
         recyclerView = findViewById(R.id.rv_com_list);
         inset_btn = findViewById(R.id.btn_insert);
         del_btn = findViewById(R.id.btn_del);
-        go = findViewById(R.id.btn_org_detail);
+        com_name = findViewById(R.id.com_name);
+        //go = findViewById(R.id.btn_org_detail);
     }
     private void init(){
         c_adapter = new C_Adapter(this,com_list);
@@ -176,43 +228,6 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
 
                }
         };*/
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                com_list = new ArrayList<Commitee_Profile>();
-                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
-                    /*firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                    try{
-                        final String userId = firebaseUser.getUid();
-                        if(dataSnapshot.getKey().equals(userId)){
-                            Commitee_Profile commitee_profile = dataSnapshot1.getValue(Commitee_Profile.class);
-                            com_list.add(commitee_profile);
-                        }
-                    }catch(NullPointerException e){
-                        e.printStackTrace();
-                    }*/
 
-                    /*firebaseUser = firebaseAuth.getCurrentUser();
-                    int uid = Integer.parseInt(firebaseUser.getUid());*/
-                    //Commitee_Profile commitee_profile =  new Commitee_Profile();
-                    Commitee_Profile commitee_profile = dataSnapshot1.getValue(Commitee_Profile.class);
-                    //String name = commitee_profile.getCommit_name();
-                    //commitee_profile.setCommit_name(name);
-                    com_list.add(commitee_profile);
-                    /*String name = commitee_profile.getCommit_name();
-                    commitee_profile.setCommit_name(name);*/
-                    //commitee_profile.getCommit_img();
-
-                }
-                c_adapter.setData(com_list);
-                /*c_adapter = new C_Adapter(See_Organiser.this,com_list);
-                recyclerView.setAdapter(c_adapter);*/
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 }
