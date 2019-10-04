@@ -25,7 +25,7 @@ public class App_Home_Page extends AppCompatActivity {
         btn_organiser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(App_Home_Page.this,See_Organiser.class);
+                Intent intent = new Intent(App_Home_Page.this,Select_type_of_organiser.class);
                 startActivity(intent);
             }
         });

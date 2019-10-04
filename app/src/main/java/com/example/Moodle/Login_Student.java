@@ -51,7 +51,7 @@ public class Login_Student extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             finish();
-            startActivity(new Intent(Login_Student.this, HomePage.class));                        //Here start activity is very important since without start we cannot jump to the next activity...
+            startActivity(new Intent(Login_Student.this, Student_Home_page.class));                        //Here start activity is very important since without start we cannot jump to the next activity...
         }
 
         //progress dialogue
@@ -110,7 +110,7 @@ public class Login_Student extends AppCompatActivity {
                     progressDialog.dismiss();
                     //finish();
                     /*Toast.makeText(Login_Student.this, "Successful Login", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login_Student.this, HomePage.class));*/
+                    startActivity(new Intent(Login_Student.this, Student_Home_page.class));*/
                     checkEmailVerification();
                 } else {
                     Toast.makeText(Login_Student.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
@@ -131,7 +131,7 @@ public class Login_Student extends AppCompatActivity {
 
         if(check){
             //finish();
-            Intent intent = new Intent(Login_Student.this,HomePage.class);
+            Intent intent = new Intent(Login_Student.this, Student_Home_page.class);
             //Here FN is my string...
             startActivity(intent);
         }else{

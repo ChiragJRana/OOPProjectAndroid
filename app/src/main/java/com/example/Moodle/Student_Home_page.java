@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class HomePage extends AppCompatActivity {
+public class Student_Home_page extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private Button btn_logout;
     private FirebaseDatabase firebaseDatabase;
@@ -59,7 +59,7 @@ public class HomePage extends AppCompatActivity {
     private void Logout(){
         firebaseAuth.signOut();
         finish();
-        startActivity(new Intent(HomePage.this, Login_Student.class));
+        startActivity(new Intent(Student_Home_page.this, Login_Student.class));
     }
 
     @Override
@@ -77,7 +77,7 @@ public class HomePage extends AppCompatActivity {
                 break;
             }
             case R.id.profileMenu:{
-                startActivity(new Intent(HomePage.this,ProfileActivity.class));
+                startActivity(new Intent(Student_Home_page.this,ProfileActivity.class));
                 break;
             }
         }
