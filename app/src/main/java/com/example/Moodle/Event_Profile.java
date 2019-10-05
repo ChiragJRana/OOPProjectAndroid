@@ -3,11 +3,11 @@ package com.example.Moodle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Commitee_Profile {
+public class Event_Profile {
     private String commit_name;
     private String commit_img;
 
-    public Commitee_Profile(String commit_name) {
+    public Event_Profile(String commit_name) {
         this.commit_name = commit_name;
 
     }

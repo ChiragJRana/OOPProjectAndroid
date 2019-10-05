@@ -46,7 +46,7 @@ public class Register_Organiser extends AppCompatActivity {
     private Button add_com;
     Uri imagePath;
     private static int PICK_IMAGE=123;
-    ArrayList<Commitee_Profile> list;
+    ArrayList<Event_Profile> list;
     RecyclerView recyclerView;
     C_Adapter c_adapter;
 

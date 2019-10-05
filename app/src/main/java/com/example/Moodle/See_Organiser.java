@@ -20,7 +20,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -29,7 +28,7 @@ import java.util.List;
 
 public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNoteListner{
 
-    private List<Commitee_Profile> com_list;
+    private List<Event_Profile> com_list;
 
     private RecyclerView recyclerView;
     private C_Adapter c_adapter;
@@ -87,7 +86,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
                 com_list = new ArrayList<>();
                 for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
                     firebaseUser = firebaseAuth.getCurrentUser();
-                    Commitee_Profile commitee_profile = dataSnapshot1.child("Organisers").child(firebaseUser.getUid()).getValue(Commitee_Profile.class);
+                    Event_Profile commitee_profile = dataSnapshot1.child("Organisers").child(firebaseUser.getUid()).getValue(Event_Profile.class);
                     com_name.setText(commitee_profile.getCommit_name());
                     com_list.add(commitee_profile);
                 }
@@ -147,7 +146,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
         /*Intent intentCaller = getIntent();
         String cn = intentCaller.getStringExtra("CN");
         String ce = intentCaller.getStringExtra("CE");
-        com_list.add(new Commitee_Profile(cn));*/
+        com_list.add(new Event_Profile(cn));*/
     }
     public void deleteItem(int position){
 
@@ -167,7 +166,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
     }
     /*private void getManualData(){
         for(int i=0;i<1;i++){
-            Commitee_Profile com_name =new Commitee_Profile();
+            Event_Profile com_name =new Event_Profile();
             switch(i){
                 case 0:
                     com_name.setCommit_name("CSI");
@@ -206,7 +205,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
     }*/
 
     /*private void getDynamicData(){
-        Commitee_Profile commitiesname = new Commitee_Profile("");
+        Event_Profile commitiesname = new Event_Profile("");
         commitiesname.setCommit_name(cn);
         //commitiesname.setCommit_img(Picasso.get().load(uri));
     }*/
@@ -222,7 +221,7 @@ public class See_Organiser extends AppCompatActivity implements C_Adapter.OnNote
     protected void onStart() {
         super.onStart();
         /*Firebasere<Organiser_Profile,> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Organiser_Profile,>
-                (Organiser_Profile.class,R.layout.single_organiser_layout,firebaseDatabase){
+                (Organiser_Profile.class,R.layout.single_event_layout,firebaseDatabase){
             @Override
             protected void populateViewHolder(){
 

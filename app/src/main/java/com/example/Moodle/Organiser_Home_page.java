@@ -19,18 +19,20 @@ public class Organiser_Home_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organiser__home_page);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    private void Logout(){
+        firebaseAuth.signOut();
+        finish();
+        startActivity(new Intent(Organiser_Home_page.this,Select_type_of_organiser.class));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
         return true;
-    }
-
-    private void Logout(){
-        firebaseAuth.signOut();
-        startActivity(new Intent(Organiser_Home_page.this,Select_type_of_organiser.class));
-        finish();
     }
 
     @Override
