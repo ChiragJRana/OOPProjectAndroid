@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,13 +16,22 @@ import com.google.firebase.auth.FirebaseUser;
 public class Organiser_Home_page extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    private Button add_event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organiser__home_page);
 
+        getUi();
         firebaseAuth = FirebaseAuth.getInstance();
+
+        add_event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Organiser_Home_page.this,Add_New_Event.class));
+            }
+        });
     }
 
     private void Logout(){
@@ -50,5 +61,9 @@ public class Organiser_Home_page extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getUi(){
+        add_event = findViewById(R.id.add_event);
     }
 }
