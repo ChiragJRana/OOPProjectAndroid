@@ -15,14 +15,14 @@
         <activity android:name=".Select_type_of_organiser" />
         <activity android:name=".Verify_Orgniser" />
         <activity android:name=".Delete_Organiser" />
-        <activity android:name=".Login_Student" />
+        <activity android:name=".Student.Login_Student" />
         <activity android:name=".Register_Organiser" />
         <activity android:name=".ChangePassword" />
         <activity android:name=".UpdateUserInfo" />
         <activity android:name=".OTPVerification" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ForgotPassword" />
-        <activity android:name=".See_Organiser" />
+        <activity android:name=".See_All_Events" />
         <activity android:name=".Select_User" />
         <activity android:name=".Register_Student" />
         <activity android:name=".Student_Home_page" />

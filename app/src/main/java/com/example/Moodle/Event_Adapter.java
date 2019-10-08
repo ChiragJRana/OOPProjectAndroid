@@ -18,32 +18,32 @@ import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
-    private List<Event_Profile> commitiesnames;
+public class Event_Adapter extends RecyclerView.Adapter<Event_Adapter.ChatViewHolder>{
+    private List<Event_Details> event_list;
     private LayoutInflater layoutInflater;
     private Context context;
-    private final String Tag="C_Adapter";
+    private final String Tag="Event_Adapter";
     //private OnNoteListner onNoteListner;
 
-    public C_Adapter(Context context,List<Event_Profile> list){
+    public Event_Adapter(Context context){
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
-        commitiesnames = new ArrayList<>();
+        event_list = new ArrayList<>();
         //this.onNoteListner = onNoteListner;
     }
-    /*public C_Adapter(Context context,ArrayList<Organiser_Profile> list){
+    /*public Event_Adapter(Context context,ArrayList<Organiser_Profile> list){
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         list = new ArrayList<>();
         //this.onNoteListner = onNoteListner;
     }*/
-    public void setData(List<Event_Profile> commitiesnames){
-        this.commitiesnames.clear();
-        this.commitiesnames.addAll(commitiesnames);
+    public void setData(List<Event_Details> event_list){
+        this.event_list.clear();
+        this.event_list.addAll(event_list);
         notifyDataSetChanged();
     }
-    public void addData(List<Event_Profile> commitiesnames){
-        this.commitiesnames.addAll(commitiesnames);
+    public void addData(List<Event_Details> event_list){
+        this.event_list.addAll(event_list);
         notifyDataSetChanged();
     }
 
@@ -56,13 +56,13 @@ public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull C_Adapter.ChatViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Event_Adapter.ChatViewHolder holder, int position) {
         Log.e(TAG,"OnBindViewHolder");
 
         /*holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(See_Organiser.this,Verify_Orgniser.class);
+                Intent intent = new Intent(See_All_Events.this,Verify_Orgniser.class);
 
             }
         });*/
@@ -71,40 +71,41 @@ public class C_Adapter extends RecyclerView.Adapter<C_Adapter.ChatViewHolder>{
 
     @Override
     public int getItemCount() {
-        return commitiesnames.size();
+        return event_list.size();
     }
 
-    public class ChatViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private ImageView imageView;
-        private TextView text_com_name;
-        private Button btn_org_detail;
+    public class ChatViewHolder extends RecyclerView.ViewHolder /*implements View.OnClickListener*/{
+        private TextView txt_com_name,txt_event_name,txt_event_date,txt_ctc_no;
         private ConstraintLayout constraintLayout;
-        OnNoteListner onNoteListner;
+        //OnNoteListner onNoteListner;
 
         public ChatViewHolder(@NonNull View view){
             super(view);
-            //btn_org_detail = view.findViewById(R.id.btn_org_detail);
-            //imageView = view.findViewById(R.id.com_logo);
-            text_com_name = view.findViewById(R.id.com_name);
+            txt_com_name = view.findViewById(R.id.tv_com_name);
+            txt_event_name = view.findViewById(R.id.event_name);
+            txt_event_date = view.findViewById(R.id.event_date);
+            txt_ctc_no = view.findViewById(R.id.ctc_person);
             constraintLayout = view.findViewById(R.id.constarintLayout);
-
             //this.onNoteListner = onNoteListner;
         }
         public void bind(){
             int position = getAdapterPosition();
-            Event_Profile com_posi = commitiesnames.get(position);
-            text_com_name.setText(com_posi.getCommit_name());
-            if(com_posi.getCommit_img()==null){
+            Event_Details event_position = event_list.get(position);
+            txt_com_name.setText(event_position.getCom_name());
+            txt_event_name.setText(event_position.getEvent_name());
+            txt_event_date.setText(event_position.getEvent_date());
+            txt_ctc_no.setText(event_position.getCtc_no());
+            /*if(event_position.getCommit_img()==null){
                 //Toast.makeText(context, "Could not upload image currently...", Toast.LENGTH_SHORT).show();
-            }
+            }*/
         }
-        @Override
+        /*@Override
         public void onClick(View view) {
             onNoteListner.onNoteClick(getAdapterPosition());                            //This gets the exact position of the point where there was a click...
-        }
+        }*/
     }
 
-    public interface OnNoteListner{
+    /*public interface OnNoteListner{
         void onNoteClick(int position);
-    }
+    }*/
 }

@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.Moodle.Student.Login_Student;
+
 public class Select_User extends AppCompatActivity {
 
     private Button std,org,signup;
@@ -29,7 +31,7 @@ public class Select_User extends AppCompatActivity {
         org.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Select_User.this, See_Organiser.class);
+                Intent intent = new Intent(Select_User.this, See_All_Events.class);
                 startActivity(intent);
                 //Select_User.this.finish();
             }

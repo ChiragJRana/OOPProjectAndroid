@@ -48,7 +48,7 @@ public class Register_Organiser extends AppCompatActivity {
     private static int PICK_IMAGE=123;
     ArrayList<Event_Profile> list;
     RecyclerView recyclerView;
-    C_Adapter c_adapter;
+    Event_Adapter c_adapter;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -103,7 +103,7 @@ public class Register_Organiser extends AppCompatActivity {
                 }
 
 
-                /*Intent intent = new Intent(Register_Organiser.this,See_Organiser.class);
+                /*Intent intent = new Intent(Register_Organiser.this,See_All_Events.class);
                 startActivity(intent);*/
             }
         });
@@ -175,7 +175,7 @@ public class Register_Organiser extends AppCompatActivity {
                     if(task.isSuccessful()){
                         uploadUserData();
                         firebaseAuth_com_email.signOut();
-                        Intent intent = new Intent(Register_Organiser.this,See_Organiser.class);
+                        Intent intent = new Intent(Register_Organiser.this, See_All_Events.class);
                     }
                     else{
                         Toast.makeText(Register_Organiser.this, "Could not upload the data", Toast.LENGTH_SHORT).show();

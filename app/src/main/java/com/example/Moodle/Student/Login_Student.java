@@ -1,4 +1,4 @@
-package com.example.Moodle;
+package com.example.Moodle.Student;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.Moodle.ForgotPassword;
+import com.example.Moodle.R;
+import com.example.Moodle.Register_Student;
+import com.example.Moodle.Student_Home_page;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -78,7 +82,7 @@ public class Login_Student extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Login_Student.this,ForgotPassword.class));
+                startActivity(new Intent(Login_Student.this, ForgotPassword.class));
                 //Login_Student.this.finish();
             }
         });

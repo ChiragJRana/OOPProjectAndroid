@@ -16,11 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -116,7 +113,7 @@ public class Delete_Organiser extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(Delete_Organiser.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Delete_Organiser.this,See_Organiser.class);
+                            Intent intent = new Intent(Delete_Organiser.this, See_All_Events.class);
                             startActivity(intent);
                             finish();
                         }

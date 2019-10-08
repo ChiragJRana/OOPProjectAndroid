@@ -36,8 +36,8 @@ public class Organiser_Home_page extends AppCompatActivity {
 
     private void Logout(){
         firebaseAuth.signOut();
+        startActivity(new Intent(Organiser_Home_page.this,App_Home_Page.class));
         finish();
-        startActivity(new Intent(Organiser_Home_page.this,Select_type_of_organiser.class));
     }
 
     @Override

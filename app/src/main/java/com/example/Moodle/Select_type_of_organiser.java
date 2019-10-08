@@ -22,7 +22,6 @@ public class Select_type_of_organiser extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Select_type_of_organiser.this,Register_Organiser.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -31,7 +30,6 @@ public class Select_type_of_organiser extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Select_type_of_organiser.this,Login_Organiser.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

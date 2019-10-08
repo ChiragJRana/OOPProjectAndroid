@@ -55,8 +55,6 @@ public class UpdateUserInfo extends AppCompatActivity {
             catch(IOException e){
                 e.printStackTrace();
             }
-
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -74,10 +72,10 @@ public class UpdateUserInfo extends AppCompatActivity {
 
         firebaseUser = profileFirebaseAuth.getCurrentUser();
 
-        final DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference(firebaseUser.getUid());
-
+        DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference();
         final StorageReference profileStorageReference = profileFirebaseStorage.getReference();         //This need to be declared final since this is been accessed by the inner class...
-        profileStorageReference.child(firebaseUser.getUid()).child("Images").child("Profile Pics").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+        profileStorageReference.child("Student Images").child(firebaseUser.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 //profilePic.setImageUri(uri);              //We cannot implement this line since the data is in the form of a link so it cannot be assigned directly to the image view...
@@ -116,12 +114,11 @@ public class UpdateUserInfo extends AppCompatActivity {
                 String upEMAIl = upEmail.getText().toString();
                 String upSTD = upStd.getText().toString();
                 String upDOB = upDob.getText().toString();
-
+                DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference();
                 UserProfile userProfile = new UserProfile(upFN,upLN,upEMAIl,upSTD,upDOB,upGEN);
 
-                profileDatabaseReference.child("Students").setValue(userProfile);
-
-                StorageReference imageReference = profileStorageReference.child(profileFirebaseAuth.getUid()).child("Images").child("Profile Pics");
+                profileDatabaseReference.child("Students").child(firebaseUser.getUid()).setValue(userProfile);
+                StorageReference imageReference = profileStorageReference.child("Student Images").child(firebaseUser.getUid());
                 //Here the data is stored in this manner on firebase Uid/Images/profile_pics.jpg...
                 //Here in the first child we can even specify audio... instead of Images...
                 UploadTask uploadTask = imageReference.putFile(imagePath);

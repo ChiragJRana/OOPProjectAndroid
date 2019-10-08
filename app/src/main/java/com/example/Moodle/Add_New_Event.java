@@ -21,7 +21,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class Add_New_Event extends AppCompatActivity {
 
-    private EditText event_name,event_date,ctc_no;
+    private EditText com_name,event_name,event_date,ctc_no;
     private Button add_event;
 
     private FirebaseAuth firebaseAuth;
@@ -56,9 +56,9 @@ public class Add_New_Event extends AppCompatActivity {
     }
 
     private void uploadEventDetails(){
-        firebaseUser = firebaseAuth.getCurrentUser();
-        Event_Details event_details = new Event_Details(event_name.getText().toString(),event_date.getText().toString(),ctc_no.getText().toString());
-        databaseReference.child("Events").child(firebaseUser.getUid()).child(event_name.getText().toString()).setValue(event_details).addOnCompleteListener(new OnCompleteListener<Void>() {
+        //firebaseUser = firebaseAuth.getCurrentUser();
+        Event_Details event_details = new Event_Details(com_name.getText().toString(),event_name.getText().toString(),event_date.getText().toString(),ctc_no.getText().toString());
+        databaseReference.child("Events")/*.child(firebaseUser.getUid())*/.child(event_name.getText().toString()).setValue(event_details).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -73,6 +73,7 @@ public class Add_New_Event extends AppCompatActivity {
     }
 
     private void getUi(){
+        com_name = findViewById(R.id.et_com_name);
         event_name = findViewById(R.id.et_event_name);
         event_date = findViewById(R.id.et_event_date);
         ctc_no = findViewById(R.id.et_ctc_no);
