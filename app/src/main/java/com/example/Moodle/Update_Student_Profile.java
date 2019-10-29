@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.Moodle.Student.User_Profile;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
-public class UpdateUserInfo extends AppCompatActivity {
+public class Update_Student_Profile extends AppCompatActivity {
 
     private ImageView uppropicImg;
     private EditText upFn,upLn,upGen,upEmail,upStd,upDob;
@@ -84,13 +85,13 @@ public class UpdateUserInfo extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UpdateUserInfo.this,"Failed to download image...",Toast.LENGTH_LONG).show();
+                Toast.makeText(Update_Student_Profile.this,"Failed to download image...",Toast.LENGTH_LONG).show();
             }
         });
         profileDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserProfile userProfile = dataSnapshot.child("Students").child(firebaseUser.getUid()).getValue(UserProfile.class);
+                User_Profile userProfile = dataSnapshot.child("Students").child(firebaseUser.getUid()).getValue(User_Profile.class);
                 upFn.setText(userProfile.getFName());
                 upLn.setText(userProfile.getLName());
                 upGen.setText(userProfile.getGender());
@@ -101,13 +102,14 @@ public class UpdateUserInfo extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UpdateUserInfo.this,databaseError.getCode(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(Update_Student_Profile.this,databaseError.getCode(),Toast.LENGTH_SHORT).show();
             }
         });
 
         upSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String imgPath = uppropicImg.toString();
                 String upFN = upFn.getText().toString();
                 String upLN = upLn.getText().toString();
                 String upGEN = upGen.getText().toString();
@@ -115,7 +117,7 @@ public class UpdateUserInfo extends AppCompatActivity {
                 String upSTD = upStd.getText().toString();
                 String upDOB = upDob.getText().toString();
                 DatabaseReference profileDatabaseReference = profileFirebaseDatabase.getReference();
-                UserProfile userProfile = new UserProfile(upFN,upLN,upEMAIl,upSTD,upDOB,upGEN);
+                User_Profile userProfile = new User_Profile(upFN,upLN,upEMAIl,upSTD,upDOB,upGEN);
 
                 profileDatabaseReference.child("Students").child(firebaseUser.getUid()).setValue(userProfile);
                 StorageReference imageReference = profileStorageReference.child("Student Images").child(firebaseUser.getUid());
@@ -125,12 +127,12 @@ public class UpdateUserInfo extends AppCompatActivity {
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UpdateUserInfo.this,"Unsuccessfull to uploaded image...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Update_Student_Profile.this,"Unsuccessfull to uploaded image...",Toast.LENGTH_SHORT).show();
                     }
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(UpdateUserInfo.this,"Successfully uploaded image...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Update_Student_Profile.this,"Successfully uploaded image...",Toast.LENGTH_SHORT).show();
                     }
                 });
 

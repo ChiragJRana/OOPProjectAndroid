@@ -1,4 +1,4 @@
-package com.example.Moodle;
+package com.example.Moodle.Student;
 
 public class CountryData {
     public static final String[] countryNames = {"Afghanistan", "Albania",
@@ -6,7 +6,7 @@ public class CountryData {
             "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan",
             "Bahrain", "Bangladesh", "Belarus", "Belgium", "Belize", "Benin",
             "Bhutan", "Bolivia", "Bosnia And Herzegovina", "Botswana",
-            "Brazil", "Brunei Darussalam", "Bulgaria", "Burkina Faso",
+            "Brazil", "Brunei Darussala", "Bulgaria", "Burkina Faso",
             "Myanmar", "Burundi", "Cambodia", "Cameroon", "Canada",
             "Cape Verde", "Central African Republic", "Chad", "Chile", "China",
             "Christmas Island", "Cocos (keeling) Islands", "Colombia",

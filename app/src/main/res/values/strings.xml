@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Moodle</string>
+    <string name="app_name">SP Events</string>
+    <string name="student_login">Student Login</string>
+    <string name="organiser_login">Organiser Login</string>
+    <string name="setTextInfo">Number of attempts remaining are:</string>
+    <string name="login">Login</string>
 </resources>

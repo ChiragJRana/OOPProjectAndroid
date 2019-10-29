@@ -27,6 +27,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Student_Home_page extends AppCompatActivity {
@@ -57,23 +58,26 @@ public class Student_Home_page extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
 
         getUi();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         init();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ed = new ArrayList<>();
                 for(DataSnapshot dataSnapshot1:dataSnapshot.child("Events").getChildren()){
                         Event_Details event_details = dataSnapshot1.getValue(Event_Details.class);
                         event_details.setCom_name(event_details.getCom_name());
-                        event_details.setEvent_name(event_details.getEvent_name());                         //I want to set the event name but i would have to get it from the object only...
+                        event_details.setEvent_name(event_details.getEvent_name());    //I want to set the event name but i would have to get it from the object only...
                         event_details.setEvent_date(event_details.getEvent_date());
                         event_details.setCtc_no(event_details.getCtc_no());
                         ed.add(event_details);
                     Toast.makeText(Student_Home_page.this, "Success...", Toast.LENGTH_SHORT).show();
                 }
-                event_adapter.setData(ed);
+
+                    event_adapter.setData(ed);
+
             }
 
             @Override
@@ -107,6 +111,7 @@ public class Student_Home_page extends AppCompatActivity {
                 startActivity(new Intent(Student_Home_page.this,ProfileActivity.class));
                 break;
             }
+
         }
         return super.onOptionsItemSelected(item);
     }

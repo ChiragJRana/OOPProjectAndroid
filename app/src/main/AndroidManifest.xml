@@ -9,31 +9,53 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Add_New_Event"></activity>
-        <activity android:name=".Organiser_Home_page" />
-        <activity android:name=".Login_Organiser" />
-        <activity android:name=".Select_type_of_organiser" />
-        <activity android:name=".Verify_Orgniser" />
-        <activity android:name=".Delete_Organiser" />
-        <activity android:name=".Student.Login_Student" />
-        <activity android:name=".Register_Organiser" />
-        <activity android:name=".ChangePassword" />
-        <activity android:name=".UpdateUserInfo" />
-        <activity android:name=".OTPVerification" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".See_All_Events" />
-        <activity android:name=".Select_User" />
-        <activity android:name=".Register_Student" />
-        <activity android:name=".Student_Home_page" />
-        <activity android:name=".Splash_screen_activity">
+        <activity android:name=".Organiser_Profile_Page"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Student.Organiser_Profile"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Add_New_Event"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Organiser_Home_page"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Login_Organiser"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Select_type_of_organiser"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Verify_Orgniser"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Delete_Organiser"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Student.Login_Student"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Register_Organiser"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ChangePassword"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Update_Student_Profile"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation="portrait"  />
+        <activity android:name=".ForgotPassword"
+            android:screenOrientation="portrait" />
+        <activity android:name=".See_All_Events"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Select_User"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Register_Student"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Student_Home_page"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Splash_screen_activity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".App_Home_Page" />
+        <activity
+            android:name=".App_Home_Page"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

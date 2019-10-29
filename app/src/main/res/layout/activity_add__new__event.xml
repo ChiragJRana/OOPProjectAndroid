@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.Moodle.Add_New_Event"
-    android:background="@drawable/background_theme">
+    android:background="@drawable/event_background"
+    tools:context="com.example.Moodle.Add_New_Event">
 
 
     <TextView
@@ -13,11 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="9dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Add your event here..."
-        android:textSize="20sp"
+        android:text="Add your event here"
         android:textColor="@color/color_start"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,31 +33,40 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Event Name..."
+        android:hint="Event Name"
         android:inputType="textPersonName"
+        android:textColor="@color/TextColor"
+        android:textColorHint="@color/TextHintColor"
+        android:textSize="20sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_com_name"
-        app:layout_constraintVertical_bias="0.079" />
+        app:layout_constraintVertical_bias="0.066" />
 
     <EditText
         android:id="@+id/et_event_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Date..."
+        android:hint="Date of Event"
         android:inputType="date"
+        android:textColor="@color/TextColor"
+        android:textColorHint="@color/TextHintColor"
+        android:textSize="20sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_event_name"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.095" />
+
 
     <EditText
         android:id="@+id/et_ctc_no"
@@ -66,29 +77,37 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Contact Number..."
+        android:hint="Contact Number "
         android:inputType="number"
+        android:textColor="@color/TextColor"
+        android:textColorHint="@color/TextHintColor"
+        android:textSize="20sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_event_date"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="0.092" />
 
     <Button
         android:id="@+id/btn_add_event"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Add event..."
+        android:background="@drawable/roundbuttons"
+        android:text="Add Event"
+        android:textColor="@color/buttontextcolor"
+        android:textSize="14sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_ctc_no"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.185" />
 
     <EditText
         android:id="@+id/et_com_name"
@@ -99,11 +118,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Committee Name..."
+        android:hint="Committee Name"
         android:inputType="textPersonName"
+        android:textColor="@color/TextColor"
+        android:textColorHint="@color/TextHintColor"
+        android:textSize="20sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_header"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

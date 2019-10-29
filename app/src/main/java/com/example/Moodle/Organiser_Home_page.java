@@ -42,7 +42,7 @@ public class Organiser_Home_page extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu_organiser,menu);
         return true;
     }
 
@@ -50,13 +50,12 @@ public class Organiser_Home_page extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch(item.getItemId()){
-            case R.id.logoutMenu:{
+            case R.id.logoutMenu_Org:{
                 Logout();
                 break;
             }
-
-            case R.id.profileMenu:{
-
+            case R.id.profileMenu_Org:{
+                startActivity(new Intent(Organiser_Home_page.this,Organiser_Profile_Page.class));
                 break;
             }
         }

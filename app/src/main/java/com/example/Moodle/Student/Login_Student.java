@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static java.lang.Thread.sleep;
+
 public class Login_Student extends AppCompatActivity {
 
     private String FN;
@@ -35,27 +41,42 @@ public class Login_Student extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private int counter=5;
     private TextView forgotPassword;
+    private ImageView applogo;
     private FirebaseDatabase firebaseDatabase;
+
+    public void setingToast(String string){
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+    }
+    public void setTextInfo(){
+        String infostring = getString(R.string.setTextInfo) + counter;
+        Info.setText(infostring);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);              //Asked to remove the title bar..
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
+
         Email = (EditText) findViewById(R.id.et_email);
         Password = (EditText) findViewById(R.id.et_password);
         LoginBtn = (Button) findViewById(R.id.btn_login);
         Info = (TextView) findViewById(R.id.tv_attempts);
         Register = (TextView) findViewById(R.id.tv_register);
         forgotPassword = (TextView)findViewById(R.id.tv_forgotPass);
-
-        Info.setText("Number of attempts remaining are: 5");
+        applogo = findViewById(R.id.imageView2);
+        applogo.animate().alpha(1f).setDuration(1000);
+        setTextInfo();
 
         //Firebase functions...
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             finish();
-            startActivity(new Intent(Login_Student.this, Student_Home_page.class));                        //Here start activity is very important since without start we cannot jump to the next activity...
+            startActivity(new Intent(Login_Student.this, Student_Home_page.class));//Here start activity is very important since without start we cannot jump to the next activity...
         }
 
         //progress dialogue
@@ -67,7 +88,6 @@ public class Login_Student extends AppCompatActivity {
                 if (check()) {            //Check the methods first get the text and then convert it to string...
                     validate(Email.getText().toString(), Password.getText().toString());
                 }
-
             }
         });
 
@@ -79,6 +99,7 @@ public class Login_Student extends AppCompatActivity {
                 //Login_Student.this.finish();
             }
         });
+
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,21 +108,18 @@ public class Login_Student extends AppCompatActivity {
             }
         });
     }
-
     private boolean check() {
-        boolean result = false;
         String userName = Email.getText().toString();
         String userPassword = Password.getText().toString();
         if (userName.isEmpty()) {
-            Toast.makeText(this, "Please enter the user name", Toast.LENGTH_SHORT).show();
-            return result;
+            setingToast("Please enter the user name");
+            return false;
         }
         if (userPassword.isEmpty()) {
-            Toast.makeText(this, "Please enter the password", Toast.LENGTH_SHORT).show();
-            return result;
+            setingToast("Please enter the password");
+            return false;
         }
-        result = true;
-        return result;
+        return true;
     }
 
     public void validate(String userEmail, String userPassword) {
@@ -117,18 +135,17 @@ public class Login_Student extends AppCompatActivity {
                     startActivity(new Intent(Login_Student.this, Student_Home_page.class));*/
                     checkEmailVerification();
                 } else {
-                    Toast.makeText(Login_Student.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
+                    setingToast("Unsuccessful");
                     progressDialog.dismiss();
                     counter--;
-                    Info.setText("Number of attempts remaining are: "+counter);
-                    if(counter==0){
+                    setTextInfo();
+                    if (counter == 0) {
                         LoginBtn.setEnabled(false);
                     }
                 }
             }
         });
     }
-
     public void checkEmailVerification(){
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Boolean check = firebaseUser.isEmailVerified();
@@ -139,7 +156,7 @@ public class Login_Student extends AppCompatActivity {
             //Here FN is my string...
             startActivity(intent);
         }else{
-            Toast.makeText(this,"Please verify the email",Toast.LENGTH_SHORT).show();;
+            setingToast("Please verify the email");
             firebaseAuth.signOut();
         }
     }

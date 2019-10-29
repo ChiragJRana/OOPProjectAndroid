@@ -52,7 +52,6 @@ public class Add_New_Event extends AppCompatActivity {
                 uploadEventDetails();
             }
         });
-
     }
 
     private void uploadEventDetails(){

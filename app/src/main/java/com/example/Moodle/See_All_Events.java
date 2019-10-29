@@ -49,6 +49,7 @@ public class See_All_Events extends AppCompatActivity /*implements Event_Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_all_organiser);
         getId();
+
         init();
 
         //getManualData();

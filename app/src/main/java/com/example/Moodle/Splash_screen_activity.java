@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-
-import static java.lang.Thread.sleep;
+import android.widget.ImageView;
+//import static java.lang.Thread.sleep;
 
 public class Splash_screen_activity extends AppCompatActivity {
 
@@ -20,16 +20,19 @@ public class Splash_screen_activity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash_screen_activity);       //This is to load the activity specified...
 
-        getSupportActionBar().hide();                                     //This hides the action bar...
+        getSupportActionBar().hide();                                   //This hides the action bar...
 
 
         LogoLauncher logoLauncher = new LogoLauncher();
         logoLauncher.start();                                            //Gave the command to start the process...
     }
 
+
     private class LogoLauncher extends Thread{
         public void run(){
-            try{
+            ImageView logo = findViewById(R.id.eventlogo);
+            logo.animate().alpha(1f).setDuration(1500);
+            try {
                 sleep(2000);
             }
             catch(InterruptedException e){
@@ -41,3 +44,4 @@ public class Splash_screen_activity extends AppCompatActivity {
     }
     }
 }
+

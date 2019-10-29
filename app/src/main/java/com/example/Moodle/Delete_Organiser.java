@@ -26,7 +26,6 @@ public class Delete_Organiser extends AppCompatActivity {
     private Button auth,delete;
     private Boolean getAuth=false;
 
-
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private FirebaseStorage firebaseStorage;

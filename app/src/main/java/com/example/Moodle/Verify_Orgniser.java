@@ -11,6 +11,4 @@ public class Verify_Orgniser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify__orgniser);
     }
-
-
 }

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.Moodle.Student.User_Profile;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -42,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         setUi();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         profileFirebaseAuth = FirebaseAuth.getInstance();
         profileFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -69,13 +72,13 @@ public class ProfileActivity extends AppCompatActivity {
         profileDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserProfile userProfile = dataSnapshot.child("Students").child(firebaseUser.getUid()).getValue(UserProfile.class);
-                profileFN.setText("FName: "+userProfile.getFName());
-                profileLN.setText("LName: "+userProfile.getLName());
+                User_Profile userProfile = dataSnapshot.child("Students").child(firebaseUser.getUid()).getValue(User_Profile.class);
+                profileFN.setText("First Name: "+userProfile.getFName());
+                profileLN.setText("Last Name: "+userProfile.getLName());
                 profileGender.setText("Gender: "+userProfile.getGender());
-                profileEmail.setText("Email: "+userProfile.getEmail());
+                profileEmail.setText("Email ID: "+userProfile.getEmail());
                 profileStd.setText("Standard: "+userProfile.getStd());
-                profileDOB.setText("DOB: "+userProfile.getDOB());
+                profileDOB.setText("Date Of Birth: "+userProfile.getDOB());
             }
 
             @Override
@@ -87,7 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,UpdateUserInfo.class));
+                startActivity(new Intent(ProfileActivity.this, Update_Student_Profile.class));
             }
         });
 
@@ -109,13 +112,19 @@ public class ProfileActivity extends AppCompatActivity {
         profileDOB = (TextView)findViewById(R.id.tvDOB);
         profileEdit = (Button)findViewById(R.id.btnEdit);
         profilechangePassword = (Button)findViewById(R.id.btnchangepwd);
+        profileEdit.setTranslationX(-1000f);
+        profilechangePassword.setTranslationX(1000f);
+        profilePic.setTranslationY(-1000f);
+        profileEdit.animate().translationXBy(1000f).setDuration(2000);
+        profilechangePassword.animate().translationXBy(-1000f).setDuration(2000);
+        profilePic.animate().translationYBy(1000f).setDuration(2000);
+
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case android.R.id.home:
-                onBackPressed();
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);

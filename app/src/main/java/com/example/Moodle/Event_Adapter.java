@@ -77,10 +77,12 @@ public class Event_Adapter extends RecyclerView.Adapter<Event_Adapter.ChatViewHo
     public class ChatViewHolder extends RecyclerView.ViewHolder /*implements View.OnClickListener*/{
         private TextView txt_com_name,txt_event_name,txt_event_date,txt_ctc_no;
         private ConstraintLayout constraintLayout;
+        //private ImageView com_pro_pic;
         //OnNoteListner onNoteListner;
 
         public ChatViewHolder(@NonNull View view){
             super(view);
+            //com_pro_pic = view.findViewById(R.id.pro_pic_com);
             txt_com_name = view.findViewById(R.id.tv_com_name);
             txt_event_name = view.findViewById(R.id.event_name);
             txt_event_date = view.findViewById(R.id.event_date);
@@ -91,6 +93,7 @@ public class Event_Adapter extends RecyclerView.Adapter<Event_Adapter.ChatViewHo
         public void bind(){
             int position = getAdapterPosition();
             Event_Details event_position = event_list.get(position);
+            //com_pro_pic.setImageURI(event_position.getUri());
             txt_com_name.setText(event_position.getCom_name());
             txt_event_name.setText(event_position.getEvent_name());
             txt_event_date.setText(event_position.getEvent_date());

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Moodle.Student.Login_Student;
+import com.example.Moodle.Student.User_Profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,10 +37,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class Register_Student extends AppCompatActivity {
 
-    private TextView heading;
     private EditText FN;
     private EditText LN;
     private EditText Email;
@@ -52,7 +53,6 @@ public class Register_Student extends AppCompatActivity {
     private TextView dob;
     private EditText phno;
     private Button btn_Register;
-    private Button login;
     private FirebaseAuth firebaseAuth;
     private FirebaseStorage firebaseStorage;
     private ImageView imageViewProPic;
@@ -82,7 +82,7 @@ public class Register_Student extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register__student);
         setUiId();
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         //getSpinner();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
@@ -128,14 +128,6 @@ public class Register_Student extends AppCompatActivity {
             }
         });
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Register_Student.this, Login_Student.class);
-                startActivity(intent);
-                //Register_Student.this.finish();
-            }
-        });
     }
     private void setUiId(){
         FN = (EditText)findViewById(R.id.et_FN);
@@ -147,7 +139,6 @@ public class Register_Student extends AppCompatActivity {
         dob = (TextView)findViewById(R.id.et_dob);
         imageViewProPic = (ImageView)findViewById(R.id.imProfile);
         btn_Register = (Button)findViewById(R.id.btn_Register);
-        login = (Button)findViewById(R.id.btn_login);
         imageViewProPic = (ImageView)findViewById(R.id.imProfile);
 
     }
@@ -235,8 +226,9 @@ public class Register_Student extends AppCompatActivity {
                 Toast.makeText(Register_Student.this,"Successfully uploaded image...",Toast.LENGTH_SHORT).show();
             }
         });
-        UserProfile userProfile = new UserProfile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString(),getRadioText());
-        databaseReference.child("Students").child(firebaseUser.getUid()).setValue(userProfile);
+
+        User_Profile userProfile = new User_Profile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString(),getRadioText());
+        databaseReference.child("Students").child(firebaseAuth.getUid()).setValue(userProfile);
     }
 
     @Override
@@ -245,7 +237,6 @@ public class Register_Student extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

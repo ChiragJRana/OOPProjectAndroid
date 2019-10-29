@@ -1,9 +1,23 @@
 package com.example.Moodle;
 
+import android.net.Uri;
+
 public class Event_Details {
 
-    private String com_name,event_name,event_date,ctc_no;
+    private Uri uri;
+    private String com_name;
+    private String event_name;
+    private String event_date;
+    private String ctc_no;
+    private String pp_url;
 
+    public Event_Details(Uri uri, String com_name, String event_name, String event_date, String ctc_no) {
+        this.uri = uri;
+        this.com_name = com_name;
+        this.event_name = event_name;
+        this.event_date = event_date;
+        this.ctc_no = ctc_no;
+    }
     public Event_Details(String com_name, String event_name, String event_date, String ctc_no) {
         this.com_name = com_name;
         this.event_name = event_name;
@@ -16,8 +30,14 @@ public class Event_Details {
         this.ctc_no = ctc_no;
     }
 
-    public Event_Details() {
+    public Event_Details() {}
 
+    public String getPp_url() {
+        return pp_url;
+    }
+
+    public void setPp_url(String pp_url) {
+        this.pp_url = pp_url;
     }
 
     public String getCom_name() { return com_name;}
@@ -47,4 +67,8 @@ public class Event_Details {
     public void setCtc_no(String ctc_no) {
         this.ctc_no = ctc_no;
     }
+
+    public Uri getUri() { return uri;   }
+
+    public void setUri(Uri uri) { this.uri = uri;  }
 }

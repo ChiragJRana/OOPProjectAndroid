@@ -10,7 +10,6 @@ public class Organiser_Profile {
         this.com_name = com_name;
         this.com_email = com_email;
     }
-
     public String getCom_name() {
         return com_name;
     }

@@ -11,7 +11,6 @@ public class Event_Profile {
         this.commit_name = commit_name;
 
     }
-
     public String getCommit_name() {
         return commit_name;
     }

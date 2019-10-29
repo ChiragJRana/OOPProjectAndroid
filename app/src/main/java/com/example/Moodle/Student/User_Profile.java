@@ -1,6 +1,7 @@
-package com.example.Moodle;
+package com.example.Moodle.Student;
 
-public class UserProfile {
+public class User_Profile {
+    private String imagePath;
     private String FName;
     private String LName;
     private String Email;
@@ -8,17 +9,25 @@ public class UserProfile {
     private String DOB;
     private String Gender;
 
-    public UserProfile(){
+    public User_Profile(){
 
     }
 
-    public UserProfile(String FName, String LName, String email, String std, String DOB,String Gender) {
+    public User_Profile(String FName, String LName, String email, String std, String DOB, String Gender) {
         this.FName = FName;
         this.LName = LName;
         this.Email = email;
         this.std = std;
         this.DOB = DOB;
         this.Gender = Gender;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getGender() {

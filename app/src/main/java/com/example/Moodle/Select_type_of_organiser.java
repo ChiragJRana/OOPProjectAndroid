@@ -34,6 +34,7 @@ public class Select_type_of_organiser extends AppCompatActivity {
         });
     }
 
+
     private void getUi(){
         new_org = (Button)findViewById(R.id.new_org);
         old_org = (Button)findViewById(R.id.old_org);

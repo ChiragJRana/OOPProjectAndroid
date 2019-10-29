@@ -15,11 +15,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class ChangePassword extends AppCompatActivity {
 
     private EditText newPass,retpyePass;
     private Button changePass;
     private FirebaseUser firebaseUser;
+    String newpassstring;
+    String retypepassstring;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,56 +31,52 @@ public class ChangePassword extends AppCompatActivity {
 
         setUi();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Comparing the two input of the password to be same...
-        //String newpass = newPass.getText().toString();
-
-        /*if(!check(newpass,retypepass)){
-            Toast.makeText(ChangePassword.this,"Please retype the password correctly...",Toast.LENGTH_LONG).show();
-        }*/
-
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
             changePass.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                    String retypepass = retpyePass.getText().toString();
-                    firebaseUser.updatePassword(retypepass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    retypepassstring = retpyePass.getText().toString();
+                    newpassstring = newPass.getText().toString();
+//
+                    if(verified()){
+                    firebaseUser.updatePassword(retypepassstring).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(ChangePassword.this,"Password changed successfully",Toast.LENGTH_SHORT).show();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(ChangePassword.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
                                 //finish();
-                            }
-                            else{
-                                Toast.makeText(ChangePassword.this,"Network error or recheck the passwords...",Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(ChangePassword.this, "Unsuccessful...", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
                 }
+                }
             });
-
-
     }
 
     private void setUi(){
         newPass = (EditText)findViewById(R.id.etnewpass);
-        retpyePass = (EditText)findViewById(R.id.etnewpass);
+        retpyePass = (EditText)findViewById(R.id.etretypepass);
         changePass = (Button)findViewById(R.id.btnchangepass);
     }
-
-    /*    if(newpass.equals(oldpass)){
-            return true;
-        }
-        else{
+    public boolean verified(){
+        if(newpassstring.equals("") || retypepassstring.equals("")){
+            Toast.makeText(this, "Enter the Password..", Toast.LENGTH_SHORT).show();
             return false;
         }
-    }*/
+        if(!newpassstring.equals(retypepassstring)){
+            Toast.makeText(ChangePassword.this,"Passwords Didn't match..",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case android.R.id.home:
-                onBackPressed();
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
