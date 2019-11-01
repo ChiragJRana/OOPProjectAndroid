@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,7 +47,7 @@ public class Register_Organiser extends AppCompatActivity {
     private ImageView imageView_com_img;
     private Button add_com;
     Uri imagePath;
-    private static int PICK_IMAGE=123;
+    private static int PICK_IMAGE = 123;
     ArrayList<Event_Profile> list;
     RecyclerView recyclerView;
     Event_Adapter c_adapter;
@@ -54,12 +55,13 @@ public class Register_Organiser extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK && data.getData()!=null){
+        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK && data.getData()!= null){
             imagePath = data.getData();
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imagePath);
                 imageView_com_img.setImageBitmap(bitmap);
             }catch(IOException e){
+
                 e.printStackTrace();
             }
         }
@@ -85,7 +87,7 @@ public class Register_Organiser extends AppCompatActivity {
                 String user_email,user_pass,user_name;
                 user_email = com_email.getText().toString().trim();
                 user_pass = com_pass.getText().toString().trim();
-                user_name = com_name.getText().toString();
+                user_name = com_name.getText().toString().trim();
                 if(checke(user_email) && checkp(user_pass) && checkn(user_name) && checkimage()){
                     //Use these two string in authentication...
                     firebaseAuth_com_email.createUserWithEmailAndPassword(user_email,user_pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -129,7 +131,7 @@ public class Register_Organiser extends AppCompatActivity {
     }
 
     private boolean checke(String user_email){
-        if(user_email.contains("@gmail.com")){
+        if(user_email.contains("@")){
             return true;
         }
         else{

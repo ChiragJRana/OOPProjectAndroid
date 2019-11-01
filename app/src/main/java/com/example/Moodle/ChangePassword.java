@@ -39,7 +39,7 @@ public class ChangePassword extends AppCompatActivity {
                     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                     retypepassstring = retpyePass.getText().toString();
                     newpassstring = newPass.getText().toString();
-//
+
                     if(verified()){
                     firebaseUser.updatePassword(retypepassstring).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

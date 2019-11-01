@@ -24,7 +24,7 @@ import com.google.firebase.storage.StorageReference;
 public class Login_Organiser extends AppCompatActivity {
 
     private EditText org_email,org_pass;
-    private Button org_register,org_login;
+    private Button org_login;
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
@@ -59,33 +59,27 @@ public class Login_Organiser extends AppCompatActivity {
                 }
             }
         });
-
-        org_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     private void getUi(){
         org_email = findViewById(R.id.org_email);
         org_pass = findViewById(R.id.org_pass);
         org_login = findViewById(R.id.org_btn_login);
-        org_register = findViewById(R.id.org_btn_register);
     }
 
     private boolean check() {
         boolean result = false;
-        String userName = org_email.getText().toString();
+        String useremail = org_email.getText().toString();
         String userPassword = org_pass.getText().toString();
-        if (userName.isEmpty()) {
-            Toast.makeText(this, "Please enter the user name", Toast.LENGTH_SHORT).show();
+        if (useremail.isEmpty() || !(useremail.contains("@spit.ac.in"))) {
+            Toast.makeText(this, "Please enter your college email", Toast.LENGTH_SHORT).show();
             return result;
         }
         if (userPassword.isEmpty()) {
             Toast.makeText(this, "Please enter the password", Toast.LENGTH_SHORT).show();
             return result;
+        }else if (userPassword.length() < 10){
+            Toast.makeText(this,"Password Length too short",Toast.LENGTH_SHORT).show();
         }
         result = true;
         return result;
