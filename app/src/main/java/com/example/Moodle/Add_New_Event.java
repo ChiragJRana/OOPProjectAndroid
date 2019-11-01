@@ -83,6 +83,10 @@ public class Add_New_Event extends AppCompatActivity {
                     Toast.makeText(Add_New_Event.this, "Please enter the required details", Toast.LENGTH_SHORT).show();
                 }else {
                     uploadEventDetails();
+                    
+                }
+                if (ctc_no.length() < 10) {
+                    Toast.makeText(Add_New_Event.this, "Incorrect Phone Number", Toast.LENGTH_SHORT).show();
                 }
             }
         });

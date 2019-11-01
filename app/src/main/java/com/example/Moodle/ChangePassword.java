@@ -63,12 +63,19 @@ public class ChangePassword extends AppCompatActivity {
         changePass = (Button)findViewById(R.id.btnchangepass);
     }
     public boolean verified(){
-        if(newpassstring.equals("") || retypepassstring.equals("")){
-            Toast.makeText(this, "Enter the Password..", Toast.LENGTH_SHORT).show();
+        if(newpassstring.length() < 10){
+            newPass.setError("Short");
+        }
+        if(newpassstring.isEmpty()){
+            newPass.setError("Error");
+            return false;
+        }
+        if(retypepassstring.isEmpty()){
+            retpyePass.setError("Empty");
             return false;
         }
         if(!newpassstring.equals(retypepassstring)){
-            Toast.makeText(ChangePassword.this,"Passwords Didn't match..",Toast.LENGTH_LONG).show();
+            retpyePass.setError("Unmatched");
             return false;
         }
         return true;
