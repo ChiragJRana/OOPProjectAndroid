@@ -75,7 +75,7 @@ public class Event_Adapter extends RecyclerView.Adapter<Event_Adapter.ChatViewHo
     }
 
     public class ChatViewHolder extends RecyclerView.ViewHolder /*implements View.OnClickListener*/{
-        private TextView txt_com_name,txt_event_name,txt_event_date,txt_ctc_no;
+        private TextView txt_com_name,txt_event_name,txt_event_date,txt_event_time,txt_ctc_no;
         private ConstraintLayout constraintLayout;
         //private ImageView com_pro_pic;
         //OnNoteListner onNoteListner;
@@ -86,6 +86,7 @@ public class Event_Adapter extends RecyclerView.Adapter<Event_Adapter.ChatViewHo
             txt_com_name = view.findViewById(R.id.tv_com_name);
             txt_event_name = view.findViewById(R.id.event_name);
             txt_event_date = view.findViewById(R.id.event_date);
+            txt_event_time = view.findViewById(R.id.event_time);
             txt_ctc_no = view.findViewById(R.id.ctc_person);
             constraintLayout = view.findViewById(R.id.constarintLayout);
             //this.onNoteListner = onNoteListner;
@@ -97,6 +98,8 @@ public class Event_Adapter extends RecyclerView.Adapter<Event_Adapter.ChatViewHo
             txt_com_name.setText(event_position.getCom_name());
             txt_event_name.setText(event_position.getEvent_name());
             txt_event_date.setText(event_position.getEvent_date());
+            txt_event_time.setText(event_position.getEvent_time());
+
             txt_ctc_no.setText(event_position.getCtc_no());
             /*if(event_position.getCommit_img()==null){
                 //Toast.makeText(context, "Could not upload image currently...", Toast.LENGTH_SHORT).show();

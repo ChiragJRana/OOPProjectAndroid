@@ -71,6 +71,7 @@ public class Student_Home_page extends AppCompatActivity {
                         event_details.setCom_name(event_details.getCom_name());
                         event_details.setEvent_name(event_details.getEvent_name());    //I want to set the event name but i would have to get it from the object only...
                         event_details.setEvent_date(event_details.getEvent_date());
+                        event_details.setEvent_time(event_details.getEvent_time());
                         event_details.setCtc_no(event_details.getCtc_no());
                         ed.add(event_details);
                     Toast.makeText(Student_Home_page.this, "Success...", Toast.LENGTH_SHORT).show();

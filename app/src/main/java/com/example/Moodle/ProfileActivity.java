@@ -73,11 +73,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User_Profile userProfile = dataSnapshot.child("Students").child(firebaseUser.getUid()).getValue(User_Profile.class);
-                profileFN.setText("First Name: "+userProfile.getFName());
-                profileLN.setText("Last Name: "+userProfile.getLName());
-                profileGender.setText("Gender: "+userProfile.getGender());
+                profileFN.setText(userProfile.getFName());
+                profileLN.setText(userProfile.getLName());
+                profileGender.setText(userProfile.getGender());
                 profileEmail.setText("Email ID: "+userProfile.getEmail());
-                profileStd.setText("Standard: "+userProfile.getStd());
+                profileStd.setText(userProfile.getStd());
                 profileDOB.setText("Date Of Birth: "+userProfile.getDOB());
             }
 
