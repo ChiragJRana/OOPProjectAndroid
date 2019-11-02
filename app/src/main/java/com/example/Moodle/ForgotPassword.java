@@ -42,18 +42,17 @@ public class ForgotPassword extends AppCompatActivity {
             public void onClick(View view) {
                 String userEmail = Email.getText().toString().trim();
                 //Checking if the string is empty or not...
-                if(userEmail.equals("")){
-                    toaster("Please enter the email id...");
+                if(!userEmail.contains("@spit.ac.in")){
+                    toaster("Please enter valid spit account");
                 }else{
                     firebaseAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 toaster("Password Reset Email sent Successful...");
-                                //finish();
-                                startActivity(new Intent(ForgotPassword.this, Login_Student.class));
+                                finish();
                             }else{
-                                toaster("Password Reset Unsuccessful try again");
+                                toaster("");
                             }
                         }
                     });

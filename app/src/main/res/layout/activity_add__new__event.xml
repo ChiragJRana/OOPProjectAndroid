@@ -62,9 +62,10 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_event_name"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintVertical_bias="0.05" />
 
 
     <EditText
@@ -128,4 +129,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_header"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="45dp"
+        android:layout_height="38dp"
+        android:alpha="1"
+        app:layout_constraintBottom_toBottomOf="@+id/et_event_date"
+        app:layout_constraintEnd_toEndOf="@+id/et_event_date"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/et_event_date"
+        app:layout_constraintTop_toTopOf="@+id/et_event_date"
+        tools:srcCompat="@android:drawable/ic_menu_my_calendar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 import static java.lang.Thread.sleep;
 
 public class Login_Student extends AppCompatActivity {
@@ -113,9 +114,14 @@ public class Login_Student extends AppCompatActivity {
         String userPassword = Password.getText().toString();
         if (userName.isEmpty()) {
             setingToast("Please enter the user name");
+            Email.setError("Empty");
             return false;
         }
-        if (userPassword.isEmpty()) {
+        if (!userName.contains("@spit.ac.in")){
+            Email.setError("Invalid");
+        }
+        if (userPassword.isEmpty()|| userPassword.length() < 10) {
+            Password.setError("Too short");
             setingToast("Please enter the password");
             return false;
         }

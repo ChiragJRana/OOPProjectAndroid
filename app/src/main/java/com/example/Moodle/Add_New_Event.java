@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class Add_New_Event extends AppCompatActivity {
     private TextView event_date;
     private Button add_event;
     private DatePickerDialog datepickerdialog ;
-
+    private ImageView datepicker;
     private FirebaseAuth firebaseAuth;
     private FirebaseStorage firebaseStorage;
     private FirebaseUser firebaseUser;
@@ -60,7 +61,7 @@ public class Add_New_Event extends AppCompatActivity {
                 datepickerdialog = new DatePickerDialog(Add_New_Event.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        event_date.setText(day +"/"+ month+"/"+year );
+                        event_date.setText(day +"/"+ (month+1)+"/"+year );
 
                     }
 
@@ -79,14 +80,9 @@ public class Add_New_Event extends AppCompatActivity {
         add_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(com_name.getText().toString().isEmpty() || event_name.getText().toString().isEmpty()|| event_date.getText().toString().isEmpty()|| ctc_no.getText().toString().isEmpty()){
-                    Toast.makeText(Add_New_Event.this, "Please enter the required details", Toast.LENGTH_SHORT).show();
-                }else {
+                if(verify()){
                     uploadEventDetails();
-                    
-                }
-                if (ctc_no.length() < 10) {
-                    Toast.makeText(Add_New_Event.this, "Incorrect Phone Number", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -115,5 +111,29 @@ public class Add_New_Event extends AppCompatActivity {
         event_date = findViewById(R.id.et_event_date);
         ctc_no = findViewById(R.id.et_ctc_no);
         add_event = findViewById(R.id.btn_add_event);
+        datepicker = findViewById(R.id.imageView6);
+    }
+    private boolean verify(){
+        if(com_name.getText().toString().isEmpty()){
+            com_name.setError("empty");
+            return false;
+        }else if (event_name.getText().toString().isEmpty()){
+            event_name.setError("empty");
+            return false;
+        }else if (event_date.getText().toString().isEmpty()){
+            event_date.setError("empty");
+            return false;
+        }else if (ctc_no.getText().toString().isEmpty()){
+            ctc_no.setError("empty");
+            return false;
+        }
+        if (ctc_no.length() < 10) {
+            ctc_no.setError("Invalid");
+            Toast.makeText(Add_New_Event.this, "Incorrect Phone Number", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+        return true;
     }
 }

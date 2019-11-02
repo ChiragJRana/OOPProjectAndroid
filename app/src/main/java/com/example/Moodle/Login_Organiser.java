@@ -73,16 +73,17 @@ public class Login_Organiser extends AppCompatActivity {
         String userPassword = org_pass.getText().toString();
         if (useremail.isEmpty() || !(useremail.contains("@spit.ac.in"))) {
             Toast.makeText(this, "Please enter your college email", Toast.LENGTH_SHORT).show();
-            return result;
+            org_email.setError("Invalid");
+            return false;
         }
         if (userPassword.isEmpty()) {
-            Toast.makeText(this, "Please enter the password", Toast.LENGTH_SHORT).show();
-            return result;
-        }else if (userPassword.length() < 10){
-            Toast.makeText(this,"Password Length too short",Toast.LENGTH_SHORT).show();
+            org_email.setError("Empty");
+            return false;
+        }else if (userPassword.length() < 10) {
+            org_pass.setError("Short");
+            return false;
         }
-        result = true;
-        return result;
+        return true;
     }
 
     private void validate(String email,String password){

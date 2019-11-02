@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -36,22 +38,20 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
 public class Register_Student extends AppCompatActivity {
 
-    private EditText FN;
-    private EditText LN;
+    private String First_Name;
+    private String Last_Name;
     private EditText Email;
     private EditText Password;
     private RadioGroup gender;
     private RadioButton selectGender;
-    private TextView std;
-    private Spinner spcntcode;
-    private List<String> priorityList;
+    private EditText branch;
     private TextView dob;
-    private EditText phno;
     private Button btn_Register;
     private FirebaseAuth firebaseAuth;
     private FirebaseStorage firebaseStorage;
@@ -60,6 +60,9 @@ public class Register_Student extends AppCompatActivity {
     Uri imagePath;                              //Uri - Unique Resource Identifier...
     private StorageReference storageReference;
     private FirebaseUser firebaseUser;
+    private int year,month,dayofMonth;
+    private Calendar calendar;
+    private DatePickerDialog datepickerdialog ;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -83,7 +86,26 @@ public class Register_Student extends AppCompatActivity {
         setContentView(R.layout.activity_register__student);
         setUiId();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        //getSpinner();
+
+        dob.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                dayofMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                datepickerdialog = new DatePickerDialog(Register_Student.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        dob.setText(day +"/"+ (month+1)+"/"+year );
+
+                    }
+
+                }, year, month,dayofMonth);
+                datepickerdialog.show();
+            }
+        });
+//
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
 
@@ -130,40 +152,82 @@ public class Register_Student extends AppCompatActivity {
 
     }
     private void setUiId(){
-        FN = (EditText)findViewById(R.id.et_FN);
-        LN = (EditText)findViewById(R.id.et_LN);
         Email = (EditText)findViewById(R.id.et_Email);
         Password = (EditText)findViewById(R.id.et_password);
         gender = (RadioGroup)findViewById(R.id.radioGroup);
-        std = (TextView) findViewById(R.id.et_std);
-        dob = (TextView)findViewById(R.id.et_dob);
+        branch = (EditText) findViewById(R.id.et_std);
+        dob = (TextView)findViewById(R.id.tv_DOB);
         imageViewProPic = (ImageView)findViewById(R.id.imProfile);
         btn_Register = (Button)findViewById(R.id.btn_Register);
-        imageViewProPic = (ImageView)findViewById(R.id.imProfile);
-
     }
+
     private boolean check(){
         boolean result=false;
-        String userName_first=FN.getText().toString();
-        String userName_last=LN.getText().toString();
         String userEmail=Email.getText().toString();
-        String DOB=dob.getText().toString();
-        if(userName_first.isEmpty()){
-            Toast.makeText(this,"Please enter the first name",Toast.LENGTH_SHORT).show();
+        if(userEmail.isEmpty() || !userEmail.contains("@spit.ac.in")){
+            Email.setError("Invalid");
+            Toast.makeText(this,"Invalid ID",Toast.LENGTH_SHORT).show();
             return result;
         }
-        if(userName_last.isEmpty()){
-            Toast.makeText(this,"Please enter the last name",Toast.LENGTH_SHORT).show();
-            return result;
+        String[] namesur = userEmail.split("@");
+        if(!namesur[0].contains(".")){
+            Email.setError("Invalid");
+            Toast.makeText(this,"Invalid ID",Toast.LENGTH_SHORT).show();
+            return false;
+        };
+        First_Name = namesur[0].split("[.]")[0];
+        String password = Password.getText().toString();
+        Last_Name= namesur[0].split("[.]")[1];
+
+        if(password.length()< 10){
+            Password.setError("Too Short");
+            Toast.makeText(this, "Password too Short", Toast.LENGTH_SHORT).show();
         }
-        if(userEmail.isEmpty()){
-            Toast.makeText(this,"Please enter the email-address",Toast.LENGTH_SHORT).show();
-            return result;
+        String branchval = branch.getText().toString();
+        switch(branchval.toUpperCase()){
+            case "FECOMPS":
+                 break;
+            case "SECOMPS":
+                break;
+            case "TECOMPS":
+                break;
+            case "BECOMPS":
+                break;
+            case "FEIT":
+                break;
+            case "SEIT":
+                break;
+            case "TEIT":
+                break;
+            case "BEIT":
+                break;
+            case "FEETRX":
+                break;
+            case "SEETRX":
+                break;
+            case "TEETRX":
+                break;
+            case "BEETRX":
+                break;
+            case "FEEXTC":
+                break;
+            case "SEEXTC":
+                break;
+            case "TEEXTC":
+                break;
+            case "BEEXTC":
+                break;
+            default:
+                branch.setError("Invalid");
+                return false;
+
         }
-        if(DOB.isEmpty()){
+
+        if(dob.getText().toString().equals("Date Of Birth")){
             Toast.makeText(this,"Please enter the date of birth",Toast.LENGTH_SHORT).show();
             return result;
         }
+
         if(imagePath==null){
             Toast.makeText(this,"Please select the image...",Toast.LENGTH_SHORT).show();
             return result;
@@ -191,13 +255,13 @@ public class Register_Student extends AppCompatActivity {
                         uploadUserData();
                         Toast.makeText(Register_Student.this,"Successfully Registered.Verification email sent",Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
-                        //finish();
-                        Intent intent = new Intent(Register_Student.this, Login_Student.class);
+                        finish();
+                        //Intent intent = new Intent(Register_Student.this, Login_Student.class);
                         //intent.putExtra("Name",FN.getText().toString());    This line is logically not correct
                         //As tis line would given the name in the title bar once on the creation of the user but not
                         //when the user loggs in after logging out
                         //Since this line fetches data from the Register_student.class and not from the fire-base...
-                        startActivity(intent);
+                        //startActivity(intent);
                     }else{
                         Toast.makeText(Register_Student.this,"Network problem",Toast.LENGTH_SHORT).show();
                     }
@@ -227,8 +291,8 @@ public class Register_Student extends AppCompatActivity {
             }
         });
 
-        User_Profile userProfile = new User_Profile(FN.getText().toString(),LN.getText().toString(),Email.getText().toString(),std.getText().toString(),dob.getText().toString(),getRadioText());
-        databaseReference.child("Students").child(firebaseAuth.getUid()).setValue(userProfile);
+        User_Profile userProfile = new User_Profile(First_Name,Last_Name,Email.getText().toString(),branch.getText().toString(),dob.getText().toString(),getRadioText());
+        databaseReference.child("Students").child(Objects.requireNonNull(firebaseAuth.getUid())).setValue(userProfile);
     }
 
     @Override

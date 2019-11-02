@@ -9,69 +9,39 @@
 
 
     <EditText
-        android:id="@+id/et_FN"
-        android:layout_width="139dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="First Name"
-        android:inputType="textPersonName"
-        android:textColor="@color/TextColor"
-        android:textColorHint="@color/TextHintColor"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imProfile" />
-
-    <EditText
-        android:id="@+id/et_LN"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textPersonName"
-        android:textColor="@color/TextColor"
-        android:textColorHint="@color/TextHintColor"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.611"
-        app:layout_constraintStart_toEndOf="@+id/et_FN"
-        app:layout_constraintTop_toBottomOf="@+id/imProfile" />
-
-    <EditText
         android:id="@+id/et_Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColor="@color/TextColor"
         android:textColorHint="@color/TextHintColor"
         android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_password" />
+        app:layout_constraintTop_toBottomOf="@+id/imProfile"
+        app:layout_constraintVertical_bias="0.066" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Email">
+        app:layout_constraintTop_toBottomOf="@+id/et_password"
+        app:layout_constraintVertical_bias="0.012">
 
         <RadioButton
             android:id="@+id/rb_Male"
@@ -140,40 +110,47 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:text="Standard"
+        android:text="Branch:"
         android:textColor="@color/TextColor"
         android:textSize="22dp"
         android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
         android:id="@+id/tv_DOB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="201dp"
+        android:layout_height="43dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
         android:text="Date Of Birth"
         android:textColor="@color/TextColor"
         android:textSize="20dp"
         android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Std" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_Std"
+        app:layout_constraintVertical_bias="0.195" />
 
     <Button
         android:id="@+id/btn_Register"
         android:layout_width="120dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/roundbuttons"
@@ -186,43 +163,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_dob" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_DOB" />
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="@color/TextColor"
         android:textColorHint="@color/TextHintColor"
         android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imProfile" />
-
-    <EditText
-        android:id="@+id/et_dob"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="dd/mm/yy"
-        android:inputType="date"
-        android:textColor="@color/TextColor"
-        android:textColorHint="@color/TextHintColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toEndOf="@+id/tv_DOB"
-        app:layout_constraintTop_toBottomOf="@+id/et_std" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Email"
+        app:layout_constraintVertical_bias="0.087" />
 
     <ImageView
         android:id="@+id/imProfile"
@@ -243,17 +204,16 @@
         android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Standard"
+        android:hint="eg.SECOMPS"
         android:inputType="textPersonName"
         android:textColor="@color/TextColor"
         android:textColorHint="@color/TextHintColor"
         android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_Std"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
-        app:layout_constraintStart_toEndOf="@+id/tv_Std"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toEndOf="@+id/tv_Std" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

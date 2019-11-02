@@ -85,7 +85,6 @@ public class ChangePassword extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
