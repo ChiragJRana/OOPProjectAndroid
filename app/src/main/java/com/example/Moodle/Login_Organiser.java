@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +60,7 @@ public class Login_Organiser extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void getUi(){
@@ -107,6 +109,7 @@ public class Login_Organiser extends AppCompatActivity {
 
     private void checkEmailVerification(){
         firebaseUser = firebaseAuth.getCurrentUser();
+
         Boolean check = firebaseUser.isEmailVerified();
         if(check){
             startActivity(new Intent(Login_Organiser.this,Organiser_Home_page.class));

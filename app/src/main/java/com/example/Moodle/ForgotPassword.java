@@ -52,7 +52,7 @@ public class ForgotPassword extends AppCompatActivity {
                                 toaster("Password Reset Email sent Successful...");
                                 finish();
                             }else{
-                                toaster("");
+                                toaster("Unsuccessful");
                             }
                         }
                     });
